@@ -1,9 +1,12 @@
 <template>
-  <div class="three-container">
-    <h1 class="hero-h">Edgar Xavier</h1>
-    <h2 class="hero-s">Full Stack Software Engineer</h2>
+  <section id="home">
+    <div id="hero">
+      <h1 class="hero-h">Edgar Xavier</h1>
+      <h2 class="hero-s">Full Stack Software Engineer</h2>
+    </div>
     <div ref="canvasContainer"></div>
-  </div>
+    <span class="transparent_gradient"></span>
+  </section>
 </template>
 
 <script setup>
@@ -59,7 +62,7 @@ const createFigure = (type, size, rotation, position, animate, emitLight) => {
       map: texture
     });
     const sunLight = new THREE.PointLight(0xffffff, 5, 100); // Color, intensity, distance
-    sunLight.position.set(0, 0, 0); // Assuming your sun is at the origin; adjust as needed
+    sunLight.position.set(0, 0, 0);
     sunLight.castShadow = true
     scene.add(sunLight);
   } else material = new THREE.MeshStandardMaterial({
@@ -110,7 +113,6 @@ const cleanup = () => {
 
 onMounted(() => {
   initScene();
-  // scene.background = new THREE.Color(0x87ceeb); // Black
   renderer.setClearColor(0xffffff, .1); // Black
   const directionalLight = new THREE.DirectionalLight(0xffffff, .3);
   directionalLight.position.x = -1;
@@ -124,30 +126,53 @@ onMounted(() => {
 onBeforeUnmount(() => {
   cleanup();
 });
-
 </script>
 
 <style scoped>
+#home {
+  background-size: cover;
+  background-image: url('../assets/imgs/bg-img2.jpg');
+}
+
+#hero {
+  position: absolute;
+  left: 20%;
+  top: 35%;
+}
+
 .hero-h,
 .hero-s {
-  position: absolute;
-  text-shadow: 1px 3px 11px rgba(0, 0, 0, .3);
+  line-height: 1em;
+  text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2.2px;
-  opacity: 1 !important;
   color: #fefefa;
 }
 
 .hero-h {
   font-size: 145px;
-  left: 20%;
-  top: 40%;
 }
 
 .hero-s {
   font-size: 22px;
-  left: 21%;
-  top: 62%;
+}
+
+@media (max-width: 962px) {
+  #home {
+    background-position: center;
+  }
+
+  #hero {
+    top: 40%;
+  }
+
+  .hero-h {
+    font-size: 3em;
+  }
+
+  .hero-s {
+    font-size: 1.5em;
+  }
 }
 </style>
