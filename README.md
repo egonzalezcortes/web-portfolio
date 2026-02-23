@@ -73,3 +73,13 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## CI Security Audit
+
+Run the CI audit gate with a scoped allowlist for the known upstream advisory:
+
+```bash
+npm run audit:ci
+```
+
+This command fails CI on high/critical vulnerabilities except `GHSA-3ppc-4f35-3m26`, which is currently transitive in the Nuxt/Nitro dependency chain.
