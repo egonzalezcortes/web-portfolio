@@ -80,4 +80,25 @@
   background-color: #4af626;
   z-index: -1;
 }
+
+@media (max-width: 562px) {
+  .section-title {
+    font-size: 50px;
+    padding-top: 50px;
+  }
+
+  .exp-element {
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .exp-element h2 {
+    font-size: 1.5em;
+  }
+
+  .exp-element p {
+    font-size: 1em;
+  }
+}
 </style>
