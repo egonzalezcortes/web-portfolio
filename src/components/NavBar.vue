@@ -12,7 +12,7 @@
       </svg>
       <ul v-if="screenWidth > 962 || open" id="nav-menu">
         <li>
-          <a href="home">/home</a>
+          <a href="/">/home</a>
         </li>
         <li>
           <a href="expertise">/expertise</a>

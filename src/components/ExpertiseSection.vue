@@ -5,10 +5,10 @@
     <div class="exp-container">
       <div class="exp-element">
         <h2>
-          Software Development
+          Software Engineering
           <span class="chonky-underline" />
         </h2>
-        <p>Experienced in both functional and OOP: Dart, Python, Java, JavaScript, TypeScript.</p>
+        <p>Skilled in developing robust and scalable software solutions across various domains.</p>
       </div>
 
       <div class="exp-element">
@@ -16,16 +16,16 @@
           Frontend Development
           <span class="chonky-underline" />
         </h2>
-        <p>Passionate about UI/UX. Over 5 years of development experience in HTML, CSS, JS, React and NextJS frameworks.
+        <p>Expertise in modern frontend technologies including React and Vue.
         </p>
       </div>
 
       <div class="exp-element">
         <h2>
-          Backend Systems
+          Backend Systems Development
           <span class="chonky-underline" />
         </h2>
-        <p>Skilled in developing hybrid mobile apps and cross-platform solutions using the Flutter framework.</p>
+        <p>Experienced in building and maintaining robust backend systems using Node.js, Python and Golang.</p>
       </div>
     </div>
   </section>
