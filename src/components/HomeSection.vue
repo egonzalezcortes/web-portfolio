@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
 <style scoped>
 #home {
   background-size: cover;
-  background-image: url('../assets/imgs/bg-img2.jpg');
+  background-image: url('../assets/imgs/bg-img2-compressed.jpg');
 }
 
 #hero {
