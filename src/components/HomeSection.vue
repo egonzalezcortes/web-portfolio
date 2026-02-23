@@ -130,6 +130,8 @@ onBeforeUnmount(() => {
 
 <style scoped>
 #home {
+  position: relative;
+  overflow: hidden;
   background-size: cover;
   background-image: url('../assets/imgs/bg-img2-compressed.jpg');
 }

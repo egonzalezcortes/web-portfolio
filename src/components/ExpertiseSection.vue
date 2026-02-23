@@ -36,6 +36,11 @@
 </script>
 
 <style scoped>
+#expertise {
+  background-color: #181818;
+  color: #fff;
+}
+
 .section-title {
   font-size: 75px;
   text-align: center;
@@ -56,6 +61,9 @@
 }
 
 .exp-element h2 {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
   font-weight: 600;
   font-size: 2em;
   line-height: 1.2em;
@@ -64,11 +72,12 @@
 }
 
 .chonky-underline {
-  display: block;
-  height: .5em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: .05em;
+  height: .45em;
   background-color: #4af626;
-  position: relative;
-  top: -15px;
-  z-index: -10;
+  z-index: -1;
 }
 </style>
