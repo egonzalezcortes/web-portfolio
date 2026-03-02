@@ -1,11 +1,12 @@
 <template>
   <section id="about">
-    <h1 class="section-title">About Me</h1>
+    <h2 class="section-title">About Me</h2>
 
     <div class="about-container">
       <p class="bio-text intro-text">
         Full-stack software engineer with 6+ years of experience building secure, high-reliability web systems in
-        regulated and mission-critical environments. Experienced in designing privacy-conscious architectures, evolving
+        regulated and mission-critical environments. Experienced in designing privacy-conscious architectures,
+        evolving
         complex front-end/back-end integrations, and improving system maintainability under real-world operational
         constraints. Strong ownership mindset with a track record of leading migrations, improving performance, and
         collaborating closely across teams.
