@@ -5,6 +5,9 @@
     <div class="competencies-container section-inner">
       <article class="competency-card competency-card--systems">
         <h3 class="competency-title">Systems & Backend</h3>
+        <div class="tech-row">
+          <TechBadge v-for="tech in systemsTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+        </div>
         <ul class="competency-list">
           <li>
             REST API design and contract definition
@@ -23,6 +26,9 @@
 
       <article class="competency-card competency-card--frontend">
         <h3 class="competency-title">Frontend</h3>
+        <div class="tech-row">
+          <TechBadge v-for="tech in frontendTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+        </div>
         <ul class="competency-list">
           <li>Component-driven architecture in Vue and React</li>
           <li>State synchronization across complex UI flows</li>
@@ -32,6 +38,9 @@
 
       <article class="competency-card competency-card--cloud">
         <h3 class="competency-title">Cloud & Infrastructure</h3>
+        <div class="tech-row">
+          <TechBadge v-for="tech in cloudTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+        </div>
         <ul class="competency-list">
           <li>Linux server provisioning and maintenance</li>
           <li>Nginx reverse proxy configuration</li>
@@ -44,6 +53,24 @@
 </template>
 
 <script setup>
+import TechBadge from './TechBadge.vue';
+
+const systemsTech = [
+  { iconClass: 'devicon-nodejs-plain colored', label: 'Node.js' },
+  { iconClass: 'devicon-express-original', label: 'Express' },
+  { iconClass: 'devicon-postgresql-plain colored', label: 'PostgreSQL' }
+];
+
+const frontendTech = [
+  { iconClass: 'devicon-vuejs-plain colored', label: 'Vue' },
+  { iconClass: 'devicon-react-original colored', label: 'React' }
+];
+
+const cloudTech = [
+  { iconClass: 'devicon-linux-plain', label: 'Linux' },
+  { iconClass: 'devicon-nginx-original colored', label: 'Nginx' },
+  { iconClass: 'devicon-amazonwebservices-plain', label: 'AWS' }
+];
 </script>
 
 <style scoped>
@@ -69,23 +96,30 @@
 }
 
 .competency-card--systems {
-  --card-accent: #4af626;
+  --card-accent: var(--accent-matrix);
 }
 
 .competency-card--frontend {
-  --card-accent: #F6511D;
+  --card-accent: var(--accent-phosphor);
 }
 
 .competency-card--cloud {
-  --card-accent: #548687;
+  --card-accent: var(--accent-cyan);
 }
 
 .competency-title {
   font-size: 1.15rem;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
+}
+
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .competency-list {

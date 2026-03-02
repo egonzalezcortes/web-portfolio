@@ -15,7 +15,7 @@
       <h2 class="about-subtitle">How I Build Software</h2>
 
       <div class="principles-grid">
-        <SurfaceCard>
+        <SurfaceCard accent="var(--accent-cyan)">
           <p class="principle-text">
             I approach software as a set of interconnected systems rather than isolated features. I value clear
             boundaries between layers, predictable data flow, and designs that scale in complexity without collapsing

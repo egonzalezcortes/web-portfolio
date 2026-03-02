@@ -1,4 +1,5 @@
 @import './base.css';
+@import 'devicon/devicon.min.css';
 
 #app {
   font-weight: normal;
@@ -12,6 +13,14 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+:root {
+  --accent-matrix: #4af626;
+  --accent-phosphor: #f2a900;
+  --accent-cyan: #2de2e6;
+  --accent-synth: #db5aba;
+  --accent-nintendo-red: #e4000f;
 }
 
 section {
@@ -35,7 +44,7 @@ section {
 }
 
 ::selection {
-  background: #4af626;
+  background: var(--accent-matrix);
   color: #000;
 }
 

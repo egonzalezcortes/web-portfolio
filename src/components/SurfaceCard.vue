@@ -19,7 +19,7 @@ defineProps({
   },
   accent: {
     type: String,
-    default: '#4af626'
+    default: 'var(--accent-matrix)'
   },
   borderColor: {
     type: String,

@@ -3,11 +3,15 @@
     <h2 class="section-title">Professional Experience</h2>
 
     <div class="experience-container section-inner">
-      <SurfaceCard border-color="rgba(255, 255, 255, 0.24)" shadow="0 8px 20px rgba(0, 0, 0, 0.22)" padding="22px">
+      <SurfaceCard accent="var(--accent-phosphor)" border-color="rgba(255, 255, 255, 0.24)"
+        shadow="0 8px 20px rgba(0, 0, 0, 0.22)" padding="22px">
         <header class="experience-header">
           <h3 class="company-role">CACI — Full Stack Software Engineer</h3>
           <p class="experience-years">2021 – 2025</p>
         </header>
+        <div class="tech-row">
+          <TechBadge v-for="tech in caciTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+        </div>
 
         <p class="experience-text">
           Led the migration of a legacy frontend system to Vue 2 and later Vue 3 within a secure, mission-critical
@@ -21,11 +25,15 @@
         </p>
       </SurfaceCard>
 
-      <SurfaceCard border-color="rgba(255, 255, 255, 0.24)" shadow="0 8px 20px rgba(0, 0, 0, 0.22)" padding="22px">
+      <SurfaceCard accent="var(--accent-nintendo-red)" border-color="rgba(255, 255, 255, 0.24)"
+        shadow="0 8px 20px rgba(0, 0, 0, 0.22)" padding="22px">
         <header class="experience-header">
           <h3 class="company-role">Borilabs — Full Stack Developer</h3>
           <p class="experience-years">2019 – 2021</p>
         </header>
+        <div class="tech-row">
+          <TechBadge v-for="tech in borilabsTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+        </div>
 
         <p class="experience-text">
           Designed and implemented a role-based access control system governing user permissions across large
@@ -43,6 +51,18 @@
 
 <script setup>
 import SurfaceCard from './SurfaceCard.vue';
+import TechBadge from './TechBadge.vue';
+
+const caciTech = [
+  { iconClass: 'devicon-vuejs-plain colored', label: 'Vue' },
+  { iconClass: 'devicon-nodejs-plain colored', label: 'Node.js' },
+  { iconClass: 'devicon-express-original', label: 'Express' }
+];
+
+const borilabsTech = [
+  { iconClass: 'devicon-react-original colored', label: 'React' },
+  { iconClass: 'devicon-amazonwebservices-plain', label: 'AWS S3/IAM' }
+];
 </script>
 
 <style scoped>
@@ -82,6 +102,13 @@ import SurfaceCard from './SurfaceCard.vue';
   line-height: 1.75;
   margin-bottom: 10px;
   opacity: 0.95;
+}
+
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .experience-text:last-child {
