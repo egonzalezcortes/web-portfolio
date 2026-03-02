@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fontsource/orbitron": "^5.2.8",
     "three": "^0.174.0",
     "vue": "^3.5.13"
   },

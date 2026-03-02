@@ -1,4 +1,6 @@
 @import './base.css';
+@import '@fontsource/orbitron/600.css';
+@import '@fontsource/orbitron/700.css';
 
 #app {
   font-weight: normal;
@@ -109,13 +111,6 @@ a {
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
   }
 }
 
