@@ -1,6 +1,4 @@
 import {
-  BoxGeometry,
-  CylinderGeometry,
   DirectionalLight,
   Mesh,
   MeshStandardMaterial,
@@ -12,8 +10,6 @@ import {
 } from 'three'
 
 export {
-  BoxGeometry,
-  CylinderGeometry,
   DirectionalLight,
   Mesh,
   MeshStandardMaterial,

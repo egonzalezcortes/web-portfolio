@@ -1,6 +1,6 @@
 <template>
   <section id="home">
-    <img id="home-bg" :src="heroBg" alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
+    <img id="home-bg" :src="heroBg" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="async" />
     <div id="hero">
       <h1 class="hero-h">Edgar Xavier</h1>
       <h2 class="hero-s">Full Stack Software Engineer</h2>
@@ -17,11 +17,22 @@ import heroBg from '../assets/imgs/bg-img2-compressed.jpg';
 let threeDeps = null;
 
 const canvasContainer = ref(null);
-let error = ref(false);
 const figures = ref([]);
 let scene, camera, renderer;
 let initTimeoutId = null;
 let initIdleId = null;
+let shouldRunThree = true;
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const hasSaveData = () => {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  return !!connection?.saveData;
+};
+
+const isDesktopLayout = () => window.matchMedia('(min-width: 963px)').matches;
+
+const canInitializeThree = () => isDesktopLayout() && !prefersReducedMotion() && !hasSaveData();
 
 const loadThree = async () => {
   if (!threeDeps) {
@@ -46,12 +57,10 @@ const initScene = () => {
     1000
   );
 
-  // createFigure('SPHERE', 2, { rx: 0, ry: 0 }, { px: 0, py: 0 }, false, true);
-  createFigure('SPHERE', 5, { rx: 0, ry: 0 }, { px: -3, py: -2 }, true, false);
-  // createFigure('SPHERE', 3, { rx: 0, ry: 0 }, { px: 10, py: -6 }, true, false);
-  // createFigure('CYLINDER', 500, 500, -1, -1);
+  createFigure(5, { rx: 0, ry: 0 }, { px: -3, py: -2 }, true, false);
 
-  renderer = new WebGLRenderer();
+  renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
   renderer.setSize(width, height, false);
   renderer.domElement.style.display = 'block';
   renderer.domElement.style.width = '100%';
@@ -60,10 +69,8 @@ const initScene = () => {
   camera.position.z = 15;
 };
 
-const createFigure = (type, size, rotation, position, animate, emitLight) => {
+const createFigure = (size, rotation, position, animate, emitLight) => {
   const {
-    BoxGeometry,
-    CylinderGeometry,
     Mesh,
     MeshStandardMaterial,
     PointLight,
@@ -71,15 +78,8 @@ const createFigure = (type, size, rotation, position, animate, emitLight) => {
   } = threeDeps;
   const { rx, ry } = rotation;
   const { px, py } = position;
-  let geometry;
+  const geometry = new SphereGeometry(size, 16, 16);
   let material
-  if (type === 'CUBE') geometry = new BoxGeometry(size, size, 1);
-  else if (type === 'CYLINDER') geometry = new CylinderGeometry(1, 1, 5, 32);
-  else if (type === 'SPHERE') geometry = new SphereGeometry(size, 32, 32);
-  else {
-    error.value = true;
-    return null;
-  };
 
   if (emitLight) {
     material = new MeshStandardMaterial({
@@ -108,6 +108,7 @@ const createFigure = (type, size, rotation, position, animate, emitLight) => {
 }
 
 const animate = () => {
+  if (!renderer || !scene || !camera) return;
   const time = Date.now() * 0.0002;
   figures.value.forEach((fig, i) => {
     if (!fig.animate) return;
@@ -121,17 +122,20 @@ const animate = () => {
 };
 
 const handleResize = () => {
+  if (!renderer || !camera || !shouldRunThree) return;
   const { width, height } = getViewportSize();
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
 };
 
 const cleanup = () => {
+  window.removeEventListener('resize', handleResize);
+
   if (!renderer || !canvasContainer.value) return;
 
   renderer.setAnimationLoop(null);
-  window.removeEventListener('resize', handleResize);
   if (canvasContainer.value.contains(renderer.domElement)) {
     canvasContainer.value.removeChild(renderer.domElement);
   }
@@ -143,6 +147,7 @@ const cleanup = () => {
 };
 
 const initThreeScene = async () => {
+  if (!shouldRunThree || !canvasContainer.value) return;
   await loadThree();
   const { DirectionalLight } = threeDeps;
   initScene();
@@ -156,21 +161,38 @@ const initThreeScene = async () => {
 };
 
 onMounted(() => {
-  if ('requestIdleCallback' in window) {
-    initIdleId = window.requestIdleCallback(() => {
-      initThreeScene();
-    }, { timeout: 1200 });
-    return;
-  }
+  shouldRunThree = canInitializeThree();
+  if (!shouldRunThree) return;
 
-  initTimeoutId = window.setTimeout(() => {
-    initThreeScene();
-  }, 250);
+  const startInit = () => {
+    if ('requestIdleCallback' in window) {
+      initIdleId = window.requestIdleCallback(() => {
+        initThreeScene();
+      }, { timeout: 3200 });
+      return;
+    }
+
+    initTimeoutId = window.setTimeout(() => {
+      initThreeScene();
+    }, 1800);
+  };
+
+  if (document.readyState === 'complete') {
+    startInit();
+  } else {
+    const onLoad = () => {
+      window.removeEventListener('load', onLoad);
+      startInit();
+    };
+    window.addEventListener('load', onLoad, { once: true });
+  }
 });
 
 onBeforeUnmount(() => {
-  if (initIdleId !== null && 'cancelIdleCallback' in window) {
+  if ('requestIdleCallback' in window) {
+    if (initIdleId !== null) {
     window.cancelIdleCallback(initIdleId);
+    }
   }
   if (initTimeoutId !== null) {
     window.clearTimeout(initTimeoutId);
