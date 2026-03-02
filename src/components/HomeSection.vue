@@ -6,7 +6,8 @@
       <source :srcset="heroBgAvif" type="image/avif" />
       <source :srcset="heroBg960Webp" type="image/webp" media="(max-width: 768px)" />
       <source :srcset="heroBg1600Webp" type="image/webp" media="(max-width: 1440px)" />
-      <img id="home-bg" :src="heroBgJpg" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="async" />
+      <img id="home-bg" :src="heroBgJpg" alt="" aria-hidden="true" fetchpriority="high" loading="eager"
+        decoding="async" />
     </picture>
     <div id="hero">
       <h1 class="hero-h">Edgar Xavier</h1>
