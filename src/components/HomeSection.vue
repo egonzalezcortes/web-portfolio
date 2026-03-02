@@ -4,7 +4,7 @@
       <h1 class="hero-h">Edgar Xavier</h1>
       <h2 class="hero-s">Full Stack Software Engineer</h2>
     </div>
-    <div ref="canvasContainer"></div>
+    <div ref="canvasContainer" id="home-canvas"></div>
     <span class="transparent_gradient"></span>
   </section>
 </template>
@@ -123,7 +123,9 @@ const cleanup = () => {
 
   renderer.setAnimationLoop(null);
   window.removeEventListener('resize', handleResize);
-  canvasContainer.value.removeChild(renderer.domElement);
+  if (canvasContainer.value.contains(renderer.domElement)) {
+    canvasContainer.value.removeChild(renderer.domElement);
+  }
   figures.value.forEach(fig => {
     fig.geometry.dispose();
     fig.material.dispose();
@@ -151,20 +153,34 @@ onBeforeUnmount(() => {
 
 <style scoped>
 #home {
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
   background-size: cover;
   background-image: url('../assets/imgs/bg-img2-compressed.jpg');
 }
 
+#home-canvas {
+  width: 100%;
+  height: 100vh;
+}
+
 #hero {
   position: absolute;
   left: 20%;
   top: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: max-content;
 }
 
 .hero-h,
 .hero-s {
+  margin: 0;
+  display: block;
+  width: max-content;
+  text-align: left;
   line-height: 1em;
   text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
   font-weight: 600;
@@ -175,10 +191,12 @@ onBeforeUnmount(() => {
 
 .hero-h {
   font-size: 145px;
+  margin-left: -0.02em;
 }
 
 .hero-s {
   font-size: 22px;
+  margin-top: 8px;
 }
 
 @media (max-width: 962px) {
@@ -192,6 +210,7 @@ onBeforeUnmount(() => {
 
   .hero-h {
     font-size: 3em;
+    margin-left: 0;
   }
 
   .hero-s {
