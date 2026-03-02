@@ -28,3 +28,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Temporary Lighthouse outputs (keep curated reports under docs/perf/lighthouse)
+tmp/lighthouse/
