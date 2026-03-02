@@ -18,11 +18,18 @@ let error = ref(false);
 const figures = ref([]);
 let scene, camera, renderer;
 
+const getViewportSize = () => {
+  const width = canvasContainer.value?.clientWidth || window.innerWidth;
+  const height = window.innerHeight;
+  return { width, height };
+};
+
 const initScene = () => {
+  const { width, height } = getViewportSize();
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(
     75,
-    window.innerWidth / window.innerHeight,
+    width / height,
     0.1,
     1000
   );
@@ -33,7 +40,10 @@ const initScene = () => {
   // createFigure('CYLINDER', 500, 500, -1, -1);
 
   renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height, false);
+  renderer.domElement.style.display = 'block';
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.maxWidth = '100%';
   canvasContainer.value.appendChild(renderer.domElement);
   camera.position.z = 15;
 };
@@ -95,9 +105,10 @@ const animate = () => {
 };
 
 const handleResize = () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  const { width, height } = getViewportSize();
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height, false);
 };
 
 const cleanup = () => {
