@@ -47,6 +47,31 @@ section {
   color: #000;
 }
 
+#home ::selection {
+  background: var(--accent-matrix);
+  color: #000;
+}
+
+#about ::selection {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+#competencies ::selection {
+  background: var(--accent-phosphor);
+  color: #000;
+}
+
+#experience ::selection {
+  background: var(--accent-nintendo-red);
+  color: #fff;
+}
+
+#production ::selection {
+  background: var(--accent-synth);
+  color: #fff;
+}
+
 a {
   text-decoration: none;
   color: #fff;
