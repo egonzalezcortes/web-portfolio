@@ -2,12 +2,12 @@
   <main>
     <NavBar />
     <HomeSection />
-    <ExpertiseSection />
+    <AboutSection />
   </main>
 </template>
 
 <script setup>
 import NavBar from './components/NavBar.vue';
 import HomeSection from './components/HomeSection.vue';
-import ExpertiseSection from './components/ExpertiseSection.vue';
+import AboutSection from './components/AboutSection.vue';
 </script>

@@ -19,7 +19,7 @@
 </script>
 
 <style scoped>
-#expertise {
+#about {
   background-color: #181818;
   color: #fff;
 }
