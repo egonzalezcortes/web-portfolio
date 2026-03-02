@@ -1,6 +1,13 @@
 <template>
   <section id="home">
-    <img id="home-bg" :src="heroBg" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="async" />
+    <picture id="home-bg-picture">
+      <source :srcset="heroBg960Avif" type="image/avif" media="(max-width: 768px)" />
+      <source :srcset="heroBg1600Avif" type="image/avif" media="(max-width: 1440px)" />
+      <source :srcset="heroBgAvif" type="image/avif" />
+      <source :srcset="heroBg960Webp" type="image/webp" media="(max-width: 768px)" />
+      <source :srcset="heroBg1600Webp" type="image/webp" media="(max-width: 1440px)" />
+      <img id="home-bg" :src="heroBgJpg" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="async" />
+    </picture>
     <div id="hero">
       <h1 class="hero-h">Edgar Xavier</h1>
       <h2 class="hero-s">Full Stack Software Engineer</h2>
@@ -12,7 +19,12 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import heroBg from '../assets/imgs/bg-img2-compressed.jpg';
+import heroBgJpg from '../assets/imgs/bg-img2-compressed.jpg';
+import heroBgAvif from '../assets/imgs/bg-img2-compressed.avif';
+import heroBg960Avif from '../assets/imgs/bg-img2-960.avif';
+import heroBg1600Avif from '../assets/imgs/bg-img2-1600.avif';
+import heroBg960Webp from '../assets/imgs/bg-img2-960.webp';
+import heroBg1600Webp from '../assets/imgs/bg-img2-1600.webp';
 
 let threeDeps = null;
 
@@ -191,7 +203,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if ('requestIdleCallback' in window) {
     if (initIdleId !== null) {
-    window.cancelIdleCallback(initIdleId);
+      window.cancelIdleCallback(initIdleId);
     }
   }
   if (initTimeoutId !== null) {
@@ -206,6 +218,12 @@ onBeforeUnmount(() => {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+}
+
+#home-bg-picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 #home-bg {
