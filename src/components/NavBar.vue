@@ -1,176 +1,75 @@
 <template>
-  <div id="navbar">
-    <h3 id="logo">EXGC</h3>
-    <div>
-      <svg v-if="screenWidth < 962" @click="toggleMenu" id="hamburger" class="toggle-svg" :class="{ active: open }"
-        viewbox="0 0 60 40">
-        <g stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-          <path id="top-line" d="M10,10 L50,10 Z"></path>
-          <path id="middle-line" d="M10,20 L50,20 Z"></path>
-          <path id="bottom-line" d="M10,30 L50,30 Z"></path>
-        </g>
-      </svg>
-      <ul v-if="screenWidth > 962 || open" id="nav-menu">
-        <li>
-          <a href="/">/home</a>
-        </li>
-        <li>
-          <a href="expertise">/expertise</a>
-        </li>
-        <li>
-          <a href="work">/work</a>
-        </li>
-        <li>
-          <a href="experience">/experience</a>
-        </li>
-        <li>
-          <a href="contact">/contact</a>
-        </li>
-      </ul>
+  <nav ref="navRef" class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
+    <div class="container-fluid px-3 px-lg-4">
+      <a class="navbar-brand fw-bold" href="#home">EXGC</a>
+
+      <button class="navbar-toggler border-0" type="button" @click="toggleNav" aria-controls="mainNavbar"
+        :aria-expanded="String(isNavOpen)" aria-label="Toggle navigation" :class="{ collapsed: !isNavOpen }">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar" :class="{ show: isNavOpen }">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#home" @click="handleNavClick">/home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#about" @click="handleNavClick">/about</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
-const open = ref(false);
-const toggleMenu = () => {
-  open.value = !open.value;
+const isNavOpen = ref(false);
+const navRef = ref(null);
+
+const toggleNav = () => {
+  isNavOpen.value = !isNavOpen.value;
 };
 
-// Reactive state for screen width
-const screenWidth = ref(window.innerWidth);
+const handleNavClick = (event) => {
+  const target = event.currentTarget?.getAttribute('href');
 
-// Function to update screen width
-const updateScreenWidth = () => {
-  screenWidth.value = window.innerWidth;
+  if (target?.startsWith('#')) {
+    event.preventDefault();
+    const section = document.querySelector(target);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  isNavOpen.value = false;
 };
 
-// Add event listener on mount and remove it on unmount
+const handleDocumentClick = (event) => {
+  if (!isNavOpen.value) return;
+
+  const navElement = navRef.value;
+  if (navElement && !navElement.contains(event.target)) {
+    isNavOpen.value = false;
+  }
+};
+
 onMounted(() => {
-  window.addEventListener('resize', updateScreenWidth);
+  document.addEventListener('click', handleDocumentClick);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', updateScreenWidth);
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleDocumentClick);
 });
 </script>
 
 <style scoped>
-#navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 5px 20px;
-  color: #fff;
+.navbar-custom {
   background-color: transparent;
 }
 
-#logo {
-  font-size: 1.2em
-}
-
-#logo,
-a {
-  font-weight: 700;
-}
-
-li {
-  list-style-type: none;
-  padding-right: 2em;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-ul {
-  display: flex;
-}
-
-/* hamburger menu */
-svg {
-  width: 50px;
-}
-
-#top-line,
-#bottom-line,
-#middle-line {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-svg:active {
-  #top-line {
-    animation: down-rotate 0.6s ease-out both;
-  }
-
-  #bottom-line {
-    animation: up-rotate 0.6s ease-out both;
-  }
-
-  #middle-line {
-    animation: hide 0.6s ease-out forwards;
-  }
-}
-
-@keyframes up-rotate {
-  0% {
-    animation-timing-function: cubic-bezier(0.16, -0.88, 0.97, 0.53);
-    transform: translateY(0px);
-  }
-
-  30% {
-    transform-origin: center;
-    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform-origin: center;
-    transform: translateY(-10px) rotate(45deg) scale(0.9);
-  }
-}
-
-@keyframes down-rotate {
-  0% {
-    animation-timing-function: cubic-bezier(0.16, -0.88, 0.97, 0.53);
-    transform: translateY(0px);
-  }
-
-  30% {
-    transform-origin: center;
-    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform: translateY(10px);
-  }
-
-  100% {
-    transform-origin: center;
-    transform: translateY(10px) rotate(-45deg) scale(0.9);
-  }
-}
-
-@keyframes hide {
-  29% {
-    opacity: 1;
-  }
-
-  30% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@media (max-width: 962px) {
-  li {
-    padding-right: 1em;
-  }
+.nav-link {
+  text-transform: lowercase;
 }
 </style>
