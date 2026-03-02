@@ -11,12 +11,19 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import * as THREE from 'three';
+
+let THREE = null;
 
 const canvasContainer = ref(null);
 let error = ref(false);
 const figures = ref([]);
 let scene, camera, renderer;
+
+const loadThree = async () => {
+  if (!THREE) {
+    THREE = await import('three');
+  }
+};
 
 const getViewportSize = () => {
   const width = canvasContainer.value?.clientWidth || window.innerWidth;
@@ -112,6 +119,8 @@ const handleResize = () => {
 };
 
 const cleanup = () => {
+  if (!renderer || !canvasContainer.value) return;
+
   renderer.setAnimationLoop(null);
   window.removeEventListener('resize', handleResize);
   canvasContainer.value.removeChild(renderer.domElement);
@@ -122,7 +131,8 @@ const cleanup = () => {
   renderer.dispose();
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await loadThree();
   initScene();
   renderer.setClearColor(0xffffff, .1); // Black
   const directionalLight = new THREE.DirectionalLight(0xffffff, .3);

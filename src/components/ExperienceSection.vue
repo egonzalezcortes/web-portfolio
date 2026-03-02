@@ -10,7 +10,7 @@
           <p class="experience-years">2021 – 2025</p>
         </header>
         <div class="tech-row">
-          <TechBadge v-for="tech in caciTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+          <TechBadge v-for="tech in caciTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
 
         <p class="experience-text">
@@ -32,7 +32,7 @@
           <p class="experience-years">2019 – 2021</p>
         </header>
         <div class="tech-row">
-          <TechBadge v-for="tech in borilabsTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+          <TechBadge v-for="tech in borilabsTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
 
         <p class="experience-text">
@@ -54,14 +54,14 @@ import SurfaceCard from './SurfaceCard.vue';
 import TechBadge from './TechBadge.vue';
 
 const caciTech = [
-  { iconClass: 'devicon-vuejs-plain colored', label: 'Vue' },
-  { iconClass: 'devicon-nodejs-plain colored', label: 'Node.js' },
-  { iconClass: 'devicon-express-original', label: 'Express' }
+  { icon: 'vue', label: 'Vue' },
+  { icon: 'nodejs', label: 'Node.js' },
+  { icon: 'express', label: 'Express' }
 ];
 
 const borilabsTech = [
-  { iconClass: 'devicon-react-original colored', label: 'React' },
-  { iconClass: 'devicon-amazonwebservices-plain', label: 'AWS S3/IAM' }
+  { icon: 'react', label: 'React' },
+  { icon: 'aws', label: 'AWS S3/IAM' }
 ];
 </script>
 

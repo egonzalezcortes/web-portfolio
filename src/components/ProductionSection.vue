@@ -5,8 +5,7 @@
     <div class="production-container section-inner">
       <SurfaceCard as="div" accent="var(--accent-synth)">
         <div class="tech-row">
-          <TechBadge v-for="tech in productionTech" :key="tech.label" :icon-class="tech.iconClass"
-            :label="tech.label" />
+          <TechBadge v-for="tech in productionTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
 
         <p class="production-text">
@@ -33,10 +32,10 @@ import SurfaceCard from './SurfaceCard.vue';
 import TechBadge from './TechBadge.vue';
 
 const productionTech = [
-  { iconClass: 'devicon-digitalocean-plain colored', label: 'DigitalOcean' },
-  { iconClass: 'devicon-linux-plain', label: 'Linux' },
-  { iconClass: 'devicon-nginx-original colored', label: 'Nginx' },
-  { iconClass: 'devicon-amazonwebservices-plain', label: 'AWS' }
+  { icon: 'digitalocean', label: 'DigitalOcean' },
+  { icon: 'linux', label: 'Linux' },
+  { icon: 'nginx', label: 'Nginx' },
+  { icon: 'aws', label: 'AWS' }
 ];
 </script>
 

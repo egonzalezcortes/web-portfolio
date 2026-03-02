@@ -6,7 +6,7 @@
       <article class="competency-card competency-card--systems">
         <h3 class="competency-title">Systems & Backend</h3>
         <div class="tech-row">
-          <TechBadge v-for="tech in systemsTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+          <TechBadge v-for="tech in systemsTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
         <ul class="competency-list">
           <li>
@@ -27,7 +27,7 @@
       <article class="competency-card competency-card--frontend">
         <h3 class="competency-title">Frontend</h3>
         <div class="tech-row">
-          <TechBadge v-for="tech in frontendTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+          <TechBadge v-for="tech in frontendTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
         <ul class="competency-list">
           <li>Component-driven architecture in Vue and React</li>
@@ -39,7 +39,7 @@
       <article class="competency-card competency-card--cloud">
         <h3 class="competency-title">Cloud & Infrastructure</h3>
         <div class="tech-row">
-          <TechBadge v-for="tech in cloudTech" :key="tech.label" :icon-class="tech.iconClass" :label="tech.label" />
+          <TechBadge v-for="tech in cloudTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
         <ul class="competency-list">
           <li>Linux server provisioning and maintenance</li>
@@ -56,20 +56,20 @@
 import TechBadge from './TechBadge.vue';
 
 const systemsTech = [
-  { iconClass: 'devicon-nodejs-plain colored', label: 'Node.js' },
-  { iconClass: 'devicon-express-original', label: 'Express' },
-  { iconClass: 'devicon-postgresql-plain colored', label: 'PostgreSQL' }
+  { icon: 'nodejs', label: 'Node.js' },
+  { icon: 'express', label: 'Express' },
+  { icon: 'postgresql', label: 'PostgreSQL' }
 ];
 
 const frontendTech = [
-  { iconClass: 'devicon-vuejs-plain colored', label: 'Vue' },
-  { iconClass: 'devicon-react-original colored', label: 'React' }
+  { icon: 'vue', label: 'Vue' },
+  { icon: 'react', label: 'React' }
 ];
 
 const cloudTech = [
-  { iconClass: 'devicon-linux-plain', label: 'Linux' },
-  { iconClass: 'devicon-nginx-original colored', label: 'Nginx' },
-  { iconClass: 'devicon-amazonwebservices-plain', label: 'AWS' }
+  { icon: 'linux', label: 'Linux' },
+  { icon: 'nginx', label: 'Nginx' },
+  { icon: 'aws', label: 'AWS' }
 ];
 </script>
 
