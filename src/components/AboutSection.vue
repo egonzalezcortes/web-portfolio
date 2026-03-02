@@ -1,8 +1,8 @@
 <template>
-  <section id="about">
+  <section id="about" class="content-section">
     <h2 class="section-title">About Me</h2>
 
-    <div class="about-container">
+    <div class="about-container section-inner">
       <p class="bio-text intro-text">
         Full-stack software engineer with 6+ years of experience building secure, high-reliability web systems in
         regulated and mission-critical environments. Experienced in designing privacy-conscious architectures,
@@ -15,7 +15,7 @@
       <h2 class="about-subtitle">How I Build Software</h2>
 
       <div class="principles-grid">
-        <article class="principle-card">
+        <SurfaceCard>
           <p class="principle-text">
             I approach software as a set of interconnected systems rather than isolated features. I value clear
             boundaries between layers, predictable data flow, and designs that scale in complexity without collapsing
@@ -26,32 +26,25 @@
             me, shipping software includes considering reliability, data integrity, and how future developers will
             reason about the system.
           </p>
-        </article>
+        </SurfaceCard>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import SurfaceCard from './SurfaceCard.vue';
 
 </script>
 
 <style scoped>
 #about {
-  background-color: #181818;
+  background-color: var(--vt-c-black);
   color: #fff;
-}
-
-.section-title {
-  font-size: 75px;
-  text-align: center;
-  padding-top: 75px;
 }
 
 .about-container {
   max-width: 900px;
-  margin: 0 auto;
-  padding: 20px 30px 70px;
 }
 
 .bio-text {
@@ -69,20 +62,15 @@
 .about-subtitle {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
+  color: #f5f5f5;
+  text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.55);
 }
 
 .principles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-}
-
-.principle-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.02);
 }
 
 .principle-title {
@@ -94,19 +82,10 @@
 .principle-text {
   font-size: 1rem;
   line-height: 1.75;
-  opacity: 0.9;
+  opacity: 0.97;
 }
 
 @media (max-width: 562px) {
-  .section-title {
-    font-size: 50px;
-    padding-top: 50px;
-  }
-
-  .about-container {
-    padding: 20px;
-  }
-
   .bio-text {
     font-size: 1em;
     text-align: left;
@@ -115,15 +94,6 @@
   .about-subtitle {
     font-size: 1.5rem;
     text-align: left;
-  }
-
-  .about-subtitle-note {
-    text-align: left;
-    margin: 0 0 20px;
-  }
-
-  .principle-card {
-    padding: 16px;
   }
 }
 </style>

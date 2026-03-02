@@ -20,6 +20,9 @@
           <li class="nav-item">
             <a class="nav-link fw-bold" href="#competencies" @click="handleNavClick">/competencies</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#experience" @click="handleNavClick">/experience</a>
+          </li>
         </ul>
       </div>
     </div>

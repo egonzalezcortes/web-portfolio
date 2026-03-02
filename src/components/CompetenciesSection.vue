@@ -1,8 +1,8 @@
 <template>
-  <section id="competencies">
+  <section id="competencies" class="content-section">
     <h2 class="section-title">Core Competencies</h2>
 
-    <div class="competencies-container">
+    <div class="competencies-container section-inner">
       <article class="competency-card competency-card--systems">
         <h3 class="competency-title">Systems & Backend</h3>
         <ul class="competency-list">
@@ -48,31 +48,24 @@
 
 <style scoped>
 #competencies {
-  background-color: #181818;
+  background-color: var(--vt-c-black-soft);
   color: #fff;
-}
-
-.section-title {
-  font-size: 75px;
-  text-align: center;
-  padding-top: 75px;
 }
 
 .competencies-container {
   max-width: 1100px;
-  margin: 0 auto;
-  padding: 20px 30px 70px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
 .competency-card {
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-top: 4px solid var(--card-accent, var(--bs-info));
   border-radius: 12px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.22);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
 .competency-card--systems {
@@ -104,21 +97,11 @@
   font-size: 0.98rem;
   line-height: 1.6;
   margin-bottom: 8px;
+  opacity: 0.95;
 }
 
 @media (max-width: 562px) {
-  .section-title {
-    font-size: 50px;
-    padding-top: 50px;
-  }
-
-  .section-intro {
-    text-align: left;
-    padding: 0 20px;
-  }
-
   .competencies-container {
-    padding: 20px;
     grid-template-columns: 1fr;
   }
 
