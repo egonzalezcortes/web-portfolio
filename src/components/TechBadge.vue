@@ -1,12 +1,7 @@
 <template>
   <span class="tech-badge" :title="label" :aria-label="label">
-    <img
-      :class="['tech-icon', `tech-icon--${icon}`]"
-      :src="iconSrc"
-      :alt="`${label} icon`"
-      loading="lazy"
-      decoding="async"
-    />
+    <img :class="['tech-icon', `tech-icon--${icon}`]" :src="iconSrc" :alt="`${label} icon`" loading="lazy"
+      decoding="async" />
     <span class="tech-label">{{ label }}</span>
   </span>
 </template>
