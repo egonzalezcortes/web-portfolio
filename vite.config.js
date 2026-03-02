@@ -5,14 +5,13 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue(), vueDevTools()],
+export default defineConfig(({ mode }) => ({
+  plugins: [vue(), ...(mode === 'development' ? [vueDevTools()] : [])],
   build: {
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules/three')) return 'vendor-three'
-          if (id.includes('node_modules/bootstrap')) return 'vendor-bootstrap'
           if (id.includes('node_modules/vue')) return 'vendor-vue'
         },
       },
@@ -23,4 +22,4 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-})
+}))

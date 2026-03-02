@@ -1,27 +1,26 @@
 <template>
-  <nav ref="navRef" class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom"
-    :class="{ 'navbar-scrolled': isScrolled || isNavOpen }">
-    <div class="container-fluid px-3 px-lg-4">
-      <a class="navbar-brand fw-bold" href="#home">Edgar X. Gonzalez-Cortes</a>
+  <nav ref="navRef" class="site-nav navbar-custom" :class="{ 'navbar-scrolled': isScrolled || isNavOpen }">
+    <div class="site-nav-inner">
+      <a class="site-brand" href="#home">Edgar X. Gonzalez-Cortes</a>
 
-      <button class="navbar-toggler border-0" type="button" @click="toggleNav" aria-controls="mainNavbar"
+      <button class="site-toggle" type="button" @click="toggleNav" aria-controls="mainNavbar"
         :aria-expanded="String(isNavOpen)" aria-label="Toggle navigation" :class="{ collapsed: !isNavOpen }">
-        <span class="navbar-toggler-icon"></span>
+        <span class="site-toggle-icon" aria-hidden="true">{{ isNavOpen ? '✕' : '☰' }}</span>
       </button>
 
-      <div class="collapse navbar-collapse" id="mainNavbar" :class="{ show: isNavOpen }">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="#home" @click="handleNavClick">/home</a>
+      <div class="site-menu" id="mainNavbar" :class="{ show: isNavOpen }">
+        <ul class="site-links">
+          <li class="site-item">
+            <a class="site-link" href="#home" @click="handleNavClick">/home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="#about" @click="handleNavClick">/about</a>
+          <li class="site-item">
+            <a class="site-link" href="#about" @click="handleNavClick">/about</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="#competencies" @click="handleNavClick">/competencies</a>
+          <li class="site-item">
+            <a class="site-link" href="#competencies" @click="handleNavClick">/competencies</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="#experience" @click="handleNavClick">/experience</a>
+          <li class="site-item">
+            <a class="site-link" href="#experience" @click="handleNavClick">/experience</a>
           </li>
         </ul>
       </div>
@@ -80,6 +79,57 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+}
+
+.site-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  gap: 18px;
+}
+
+.site-brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.site-toggle {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0;
+  display: none;
+}
+
+.site-menu {
+  margin-left: auto;
+}
+
+.site-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-link {
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
 .navbar-custom {
   background-color: transparent;
   transition: background-color 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease;
@@ -91,7 +141,38 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
 }
 
-.nav-link {
-  text-transform: lowercase;
+@media (max-width: 992px) {
+  .site-toggle {
+    display: inline-flex;
+  }
+
+  .site-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 16px;
+    right: 16px;
+    margin-left: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(16, 16, 16, 0.95);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+    padding: 10px;
+    display: none;
+  }
+
+  .site-menu.show {
+    display: block;
+  }
+
+  .site-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .site-link {
+    display: block;
+    width: 100%;
+  }
 }
 </style>
