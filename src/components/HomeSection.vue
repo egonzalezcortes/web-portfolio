@@ -245,12 +245,12 @@ onBeforeUnmount(() => {
 
 #hero {
   position: absolute;
-  left: 20%;
+  left: clamp(24px, 10vw, 20%);
   top: 35%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: max-content;
+  width: min(90vw, max-content);
   z-index: 2;
 }
 
@@ -258,7 +258,7 @@ onBeforeUnmount(() => {
 .hero-s {
   margin: 0;
   display: block;
-  width: max-content;
+  width: 100%;
   text-align: left;
   line-height: 1em;
   text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
@@ -269,8 +269,9 @@ onBeforeUnmount(() => {
 }
 
 .hero-h {
-  font-size: 145px;
-  margin-left: -0.02em;
+  font-size: clamp(4rem, 7.5vw, 6.25rem);
+  line-height: 0.95;
+  margin-left: 0;
 }
 
 .hero-s {
