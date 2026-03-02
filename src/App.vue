@@ -3,6 +3,7 @@
     <NavBar />
     <HomeSection />
     <AboutSection />
+    <CompetenciesSection />
   </main>
 </template>
 
@@ -10,4 +11,5 @@
 import NavBar from './components/NavBar.vue';
 import HomeSection from './components/HomeSection.vue';
 import AboutSection from './components/AboutSection.vue';
+import CompetenciesSection from './components/CompetenciesSection.vue';
 </script>
