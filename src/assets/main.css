@@ -20,6 +20,23 @@ html {
   --accent-cyan: #2de2e6;
   --accent-synth: #db5aba;
   --accent-nintendo-red: #e4000f;
+  --font-display: 'Orbitron', Inter, 'Segoe UI', Roboto, sans-serif;
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.hero-h,
+.hero-s,
+.section-title,
+.about-subtitle,
+.competency-title,
+.company-role,
+.navbar-brand,
+.nav-link {
+  font-family: var(--font-display);
 }
 
 section {
