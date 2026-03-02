@@ -16,26 +16,15 @@
 
       <div class="principles-grid">
         <article class="principle-card">
-          <h3 class="principle-title">Systems Thinking</h3>
           <p class="principle-text">
-            I build software as interconnected systems, not isolated features. I design boundaries between frontend,
-            backend, and data layers intentionally, with APIs and schemas planned up front.
+            I approach software as a set of interconnected systems rather than isolated features. I value clear
+            boundaries between layers, predictable data flow, and designs that scale in complexity without collapsing
+            under maintenance.
           </p>
-        </article>
-
-        <article class="principle-card">
-          <h3 class="principle-title">Maintainability First</h3>
           <p class="principle-text">
-            I prioritize maintainability and correctness over shortcuts through clear contracts, relational integrity,
-            practical indexing strategies, and frontends that reflect backend realities.
-          </p>
-        </article>
-
-        <article class="principle-card">
-          <h3 class="principle-title">End-to-End Ownership</h3>
-          <p class="principle-text">
-            I enjoy working across the stack—from modeling data in PostgreSQL to building Express APIs and designing
-            interfaces in Vue or React—taking systems from development through deployment.
+            I prefer explicit contracts, well-defined ownership, and thoughtful trade-offs over quick abstractions. For
+            me, shipping software includes considering reliability, data integrity, and how future developers will
+            reason about the system.
           </p>
         </article>
       </div>
@@ -80,7 +69,7 @@
 .about-subtitle {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 25px;
+  margin-bottom: 8px;
 }
 
 .principles-grid {
@@ -90,21 +79,22 @@
 }
 
 .principle-card {
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.03);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .principle-title {
   font-size: 1.25rem;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
 }
 
 .principle-text {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.75;
+  opacity: 0.9;
 }
 
 @media (max-width: 562px) {
@@ -125,6 +115,11 @@
   .about-subtitle {
     font-size: 1.5rem;
     text-align: left;
+  }
+
+  .about-subtitle-note {
+    text-align: left;
+    margin: 0 0 20px;
   }
 
   .principle-card {
