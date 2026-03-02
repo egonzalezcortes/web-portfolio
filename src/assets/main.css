@@ -128,6 +128,21 @@ a {
   }
 }
 
+@media (max-width: 1200px) and (min-width: 563px) {
+  .section-title {
+    font-size: clamp(2.75rem, 6.2vw, 3.75rem);
+    line-height: 1.08;
+    padding: 60px 28px 10px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .section-title {
+    font-size: clamp(2.5rem, 5.2vw, 3.25rem);
+    padding: 56px 36px 10px;
+  }
+}
+
 @media (max-width: 562px) {
   .content-section {
     padding-bottom: 40px;
