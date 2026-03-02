@@ -93,6 +93,25 @@ const cloudTech = [
   padding: 20px;
   background: rgba(0, 0, 0, 0.22);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+@media (hover: hover) {
+  .competency-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.34);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .competency-card {
+    transition: none;
+  }
+
+  .competency-card:hover {
+    transform: none;
+  }
 }
 
 .competency-card--systems {

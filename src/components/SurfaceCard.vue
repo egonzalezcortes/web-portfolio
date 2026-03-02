@@ -52,6 +52,25 @@ defineProps({
   padding: var(--surface-padding);
   background: var(--surface-bg);
   box-shadow: var(--surface-shadow);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+@media (hover: hover) {
+  .surface-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.26);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surface-card {
+    transition: none;
+  }
+
+  .surface-card:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 562px) {
