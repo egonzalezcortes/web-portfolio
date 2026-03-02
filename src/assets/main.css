@@ -18,6 +18,22 @@ section {
   scroll-margin-top: 72px;
 }
 
+.content-section {
+  padding-bottom: 70px;
+}
+
+.section-title {
+  font-size: 75px;
+  text-align: center;
+  margin: 0;
+  padding: 75px 0 10px;
+}
+
+.section-inner {
+  margin: 0 auto;
+  padding: 20px 30px 0;
+}
+
 ::selection {
   background: #4af626;
   color: #000;
@@ -50,5 +66,20 @@ a {
   body {
     display: flex;
     place-items: center;
+  }
+}
+
+@media (max-width: 562px) {
+  .content-section {
+    padding-bottom: 40px;
+  }
+
+  .section-title {
+    font-size: 50px;
+    padding: 50px 0 10px;
+  }
+
+  .section-inner {
+    padding: 20px 20px 0;
   }
 }
