@@ -35,17 +35,50 @@ let scene, camera, renderer;
 let initTimeoutId = null;
 let initIdleId = null;
 let shouldRunThree = true;
+let sphereSegments = 16;
+let pixelRatioCap = 1.25;
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const connectionInfo = () => navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
 const hasSaveData = () => {
-  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const connection = connectionInfo();
   return !!connection?.saveData;
 };
 
 const isDesktopLayout = () => window.matchMedia('(min-width: 963px)').matches;
 
-const canInitializeThree = () => isDesktopLayout() && !prefersReducedMotion() && !hasSaveData();
+const isLikelyMobileDevice = () => window.matchMedia('(pointer: coarse)').matches;
+
+const isHighEndMobileDevice = () => {
+  const cores = navigator.hardwareConcurrency || 0;
+  const memory = navigator.deviceMemory || 0;
+
+  if (memory > 0) {
+    return cores >= 6 || memory >= 4;
+  }
+
+  return cores >= 6;
+};
+
+const isStrongNetwork = () => {
+  const connection = connectionInfo();
+  if (!connection) return false;
+
+  const effectiveType = (connection.effectiveType || '').toLowerCase();
+  const downlink = Number(connection.downlink || 0);
+
+  return effectiveType === '4g' || downlink >= 10;
+};
+
+const canEnableMobileThree = () => isLikelyMobileDevice() && (isHighEndMobileDevice() || isStrongNetwork());
+
+const canInitializeThree = () => {
+  if (prefersReducedMotion() || hasSaveData()) return false;
+  if (isDesktopLayout()) return true;
+  return canEnableMobileThree();
+};
 
 const loadThree = async () => {
   if (!threeDeps) {
@@ -73,7 +106,7 @@ const initScene = () => {
   createFigure(5, { rx: 0, ry: 0 }, { px: -3, py: -2 }, true, false);
 
   renderer = new WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelRatioCap));
   renderer.setSize(width, height, false);
   renderer.domElement.style.display = 'block';
   renderer.domElement.style.width = '100%';
@@ -91,7 +124,7 @@ const createFigure = (size, rotation, position, animate, emitLight) => {
   } = threeDeps;
   const { rx, ry } = rotation;
   const { px, py } = position;
-  const geometry = new SphereGeometry(size, 16, 16);
+  const geometry = new SphereGeometry(size, sphereSegments, sphereSegments);
   let material
 
   if (emitLight) {
@@ -140,7 +173,7 @@ const handleResize = () => {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, pixelRatioCap));
 };
 
 const cleanup = () => {
@@ -174,8 +207,22 @@ const initThreeScene = async () => {
 };
 
 onMounted(() => {
-  shouldRunThree = canInitializeThree();
+  const reducedMotion = prefersReducedMotion();
+  const saveData = hasSaveData();
+  const desktopLayout = isDesktopLayout();
+  const likelyMobile = isLikelyMobileDevice();
+  const highEndMobile = isHighEndMobileDevice();
+  const strongNetwork = isStrongNetwork();
+  const mobileThreeOptIn = !desktopLayout && likelyMobile && (highEndMobile || strongNetwork);
+
+  shouldRunThree = !reducedMotion && !saveData && (desktopLayout || mobileThreeOptIn);
+
   if (!shouldRunThree) return;
+
+  if (mobileThreeOptIn) {
+    sphereSegments = 12;
+    pixelRatioCap = 1;
+  }
 
   const startInit = () => {
     if ('requestIdleCallback' in window) {
