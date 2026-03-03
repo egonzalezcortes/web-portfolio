@@ -11,6 +11,7 @@
     <ProductionSection />
     <SectionWaveDivider top-color="var(--vt-c-black-soft)" bottom-color="var(--vt-c-black)" />
     <ContactSection />
+    <SiteFooter />
   </main>
 </template>
 
@@ -23,4 +24,5 @@ import CompetenciesSection from './components/CompetenciesSection.vue';
 import ExperienceSection from './components/ExperienceSection.vue';
 import ProductionSection from './components/ProductionSection.vue';
 import ContactSection from './components/ContactSection.vue';
+import SiteFooter from './components/SiteFooter.vue';
 </script>
