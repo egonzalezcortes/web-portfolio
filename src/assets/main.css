@@ -105,6 +105,11 @@ section {
   color: #fff;
 }
 
+#contact ::selection {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
 a {
   text-decoration: none;
   color: #fff;
