@@ -229,3 +229,64 @@ npx --yes lighthouse@12.8.2 http://localhost:4177 \
 1. Let production traffic settle (Simple Analytics may take some time for first visible data depending on browser/privacy settings).
 2. Add a short release runbook section in docs for repeatable staging -> production promotions.
 3. (Optional) Add CI automation for deploy scripts (`develop` -> staging, `main` -> production).
+
+## Continuation addendum (2026-03-03, later)
+
+### UI animation updates
+
+- Staggered glitch timing across section titles so bursts are out of phase.
+- Kept the same 5-second interval and applied section-specific delay offsets.
+
+Files:
+
+- `src/assets/main.css`
+
+### Favicon rollout updates
+
+- Integrated full favicon set from `public/favicons/` in `index.html`.
+- Added `public/favicons/site.webmanifest` and linked it in head.
+- Synced root fallback icon: `public/favicon.ico` from `public/favicons/favicon.ico`.
+- Added README maintenance note for favicon sync workflow.
+
+Files:
+
+- `index.html`
+- `public/favicons/site.webmanifest`
+- `public/favicon.ico`
+- `README.md`
+
+### Staging favicon issue (resolved)
+
+- Symptom: favicon changed locally but appeared stale on staging.
+- Root cause: aggressive favicon caching in browser/session.
+- Mitigation: added version query suffix to favicon links (`?v=20260303`).
+- Outcome: user confirmed staging now shows updated favicon.
+
+### Next session focus
+
+Investigate why Lighthouse performance is significantly lower on mobile than desktop, despite mobile disabling Three.js sphere rendering.
+
+Planned approach:
+
+1. Run paired Lighthouse audits for the same revision (mobile + desktop, 3-5 runs, compare median).
+2. Compare diagnostics/opportunities:
+
+- `mainthread-work-breakdown`
+- `bootup-time`
+- `long-tasks`
+- LCP element/resource details
+- transfer/request profile
+
+3. Confirm mobile hero path behavior:
+
+- Three.js not initialized
+- selected hero image candidate and effective bytes
+- font timing impact on first paint/LCP
+
+4. Produce prioritized fixes and re-run medians.
+
+Likely first suspects:
+
+- mobile LCP image bytes/selection,
+- JS parse/eval cost from initial bundles,
+- font/render timing under mobile throttling.

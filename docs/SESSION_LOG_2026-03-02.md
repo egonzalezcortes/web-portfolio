@@ -208,3 +208,54 @@ This session focused on performance, rendering-path optimization, and production
 - Production analytics enabled with Simple Analytics.
 - Staging analytics intentionally disabled.
 - Staging/prod deployment and indexing controls remain in healthy state.
+
+---
+
+## Continuation updates (2026-03-03, later)
+
+### 1) Title glitch timing staggered
+
+- Implemented out-of-phase glitch timing across section titles.
+- Kept global animation loop at 5 seconds while distributing phase offsets per section.
+- Adjusted offsets once more to increase spacing between bursts.
+
+Changed file:
+
+- `src/assets/main.css`
+
+### 2) Favicon set integration completed
+
+- Integrated user-provided favicon pack from `public/favicons/` into `index.html`:
+  - `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`
+  - `apple-touch-icon.png`
+  - `site.webmanifest`
+- Added `public/favicons/site.webmanifest` with Android icon entries.
+- Synced root fallback `public/favicon.ico` to match `public/favicons/favicon.ico`.
+- Added README note documenting favicon update workflow and fallback sync command.
+
+Changed files:
+
+- `index.html`
+- `public/favicons/site.webmanifest`
+- `public/favicon.ico`
+- `README.md`
+
+### 3) Staging favicon stale-cache troubleshooting (resolved)
+
+- Observed favicon mismatch between localhost and staging after deploy.
+- Diagnosed as favicon/browser cache stickiness on staging sessions.
+- Added cache-busting version suffix to favicon-related head links.
+- User confirmed staging now displays the updated favicon correctly.
+
+### 4) Requested next-session investigation
+
+Primary objective for next session:
+
+- Explain and reduce the Lighthouse mobile performance gap vs desktop, especially given Three.js is disabled on mobile.
+
+Planned investigative sequence:
+
+1. Paired Lighthouse runs (mobile + desktop) on identical revision, median comparison.
+2. Diagnostic diff: main-thread work, bootup time, long tasks, LCP resource, request/byte profile.
+3. Verify mobile hero behavior and payload selection (`currentSrc`, image bytes, font timing).
+4. Rank optimizations by expected impact and validate with post-change medians.
