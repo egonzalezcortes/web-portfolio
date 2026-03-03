@@ -1,6 +1,6 @@
 <template>
   <section id="experience" class="content-section">
-    <h2 class="section-title">Professional Experience</h2>
+    <h2 class="section-title glitch-title" data-text="Professional Experience">Professional Experience</h2>
 
     <div class="experience-container section-inner">
       <SurfaceCard accent="var(--accent-phosphor)" border-color="rgba(255, 255, 255, 0.24)"

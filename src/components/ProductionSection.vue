@@ -1,6 +1,6 @@
 <template>
   <section id="production" class="content-section">
-    <h2 class="section-title">From Code to Production</h2>
+    <h2 class="section-title glitch-title" data-text="From Code to Production">From Code to Production</h2>
 
     <div class="production-container section-inner">
       <SurfaceCard as="div" accent="var(--accent-synth)">

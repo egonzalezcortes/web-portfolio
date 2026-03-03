@@ -10,7 +10,7 @@
         decoding="async" />
     </picture>
     <div id="hero">
-      <h1 class="hero-h">Edgar Xavier</h1>
+      <h1 class="hero-h glitch-hero" data-text="Edgar Xavier">Edgar Xavier</h1>
       <h2 class="hero-s">Full Stack Software Engineer</h2>
     </div>
     <div ref="canvasContainer" id="home-canvas"></div>

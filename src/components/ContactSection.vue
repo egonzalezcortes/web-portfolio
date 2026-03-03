@@ -1,6 +1,6 @@
 <template>
   <section id="contact" class="content-section">
-    <h2 class="section-title">Contact Me</h2>
+    <h2 class="section-title glitch-title" data-text="Contact Me">Contact Me</h2>
 
     <div class="contact-container section-inner">
       <SurfaceCard as="div" accent="var(--accent-cyan)">

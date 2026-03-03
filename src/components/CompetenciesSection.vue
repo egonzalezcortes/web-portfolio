@@ -1,6 +1,6 @@
 <template>
   <section id="competencies" class="content-section">
-    <h2 class="section-title">Core Competencies</h2>
+    <h2 class="section-title glitch-title" data-text="Core Competencies">Core Competencies</h2>
 
     <div class="competencies-container section-inner">
       <article class="competency-card competency-card--systems">

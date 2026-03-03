@@ -1,6 +1,6 @@
 <template>
   <section id="about" class="content-section">
-    <h2 class="section-title">About Me</h2>
+    <h2 class="section-title glitch-title" data-text="About Me">About Me</h2>
 
     <div class="about-container section-inner">
       <p class="bio-text intro-text">
