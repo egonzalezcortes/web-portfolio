@@ -8,6 +8,11 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig(({ mode }) => ({
   plugins: [vue(), ...(mode === 'development' ? [vueDevTools()] : [])],
   build: {
+    modulePreload: {
+      resolveDependencies(_url, deps) {
+        return deps.filter((dep) => !dep.includes('vendor-three'))
+      },
+    },
     rollupOptions: {
       output: {
         manualChunks(id) {

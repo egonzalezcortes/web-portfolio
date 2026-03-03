@@ -11,7 +11,7 @@
     </picture>
     <div id="hero">
       <h1 class="hero-h glitch-hero" data-text="Edgar Xavier">Edgar Xavier</h1>
-      <h2 class="hero-s">Full Stack Software Engineer</h2>
+      <h2 class="hero-s" :class="{ 'hero-s--enhanced': heroSubtitleEnhanced }">Full Stack Software Engineer</h2>
     </div>
     <div ref="canvasContainer" id="home-canvas"></div>
     <span class="transparent_gradient"></span>
@@ -31,9 +31,12 @@ let threeDeps = null;
 
 const canvasContainer = ref(null);
 const figures = ref([]);
+const heroSubtitleEnhanced = ref(false);
 let scene, camera, renderer;
 let initTimeoutId = null;
 let initIdleId = null;
+let subtitleEnhanceTimeoutId = null;
+let mobileThreeStartHandler = null;
 let shouldRunThree = true;
 let sphereSegments = 16;
 let pixelRatioCap = 1.25;
@@ -70,14 +73,6 @@ const isStrongNetwork = () => {
   const downlink = Number(connection.downlink || 0);
 
   return effectiveType === '4g' || downlink >= 10;
-};
-
-const canEnableMobileThree = () => isLikelyMobileDevice() && (isHighEndMobileDevice() || isStrongNetwork());
-
-const canInitializeThree = () => {
-  if (prefersReducedMotion() || hasSaveData()) return false;
-  if (isDesktopLayout()) return true;
-  return canEnableMobileThree();
 };
 
 const loadThree = async () => {
@@ -207,6 +202,10 @@ const initThreeScene = async () => {
 };
 
 onMounted(() => {
+  subtitleEnhanceTimeoutId = window.setTimeout(() => {
+    heroSubtitleEnhanced.value = true;
+  }, 1400);
+
   const reducedMotion = prefersReducedMotion();
   const saveData = hasSaveData();
   const desktopLayout = isDesktopLayout();
@@ -225,30 +224,58 @@ onMounted(() => {
   }
 
   const startInit = () => {
+    const mobileInitDelay = 4200;
+    const desktopInitDelay = 1800;
+    const initDelay = mobileThreeOptIn ? mobileInitDelay : desktopInitDelay;
+
     if ('requestIdleCallback' in window) {
       initIdleId = window.requestIdleCallback(() => {
         initThreeScene();
-      }, { timeout: 3200 });
+      }, { timeout: initDelay + 1500 });
       return;
     }
 
     initTimeoutId = window.setTimeout(() => {
       initThreeScene();
-    }, 1800);
+    }, initDelay);
   };
 
-  if (document.readyState === 'complete') {
-    startInit();
-  } else {
+  const startWhenReady = () => {
+    if (document.readyState === 'complete') {
+      startInit();
+      return;
+    }
+
     const onLoad = () => {
       window.removeEventListener('load', onLoad);
       startInit();
     };
     window.addEventListener('load', onLoad, { once: true });
+  };
+
+  if (mobileThreeOptIn) {
+    mobileThreeStartHandler = () => {
+      window.removeEventListener('pointerdown', mobileThreeStartHandler);
+      window.removeEventListener('touchstart', mobileThreeStartHandler);
+      window.removeEventListener('scroll', mobileThreeStartHandler);
+      window.removeEventListener('keydown', mobileThreeStartHandler);
+      startWhenReady();
+    };
+
+    window.addEventListener('pointerdown', mobileThreeStartHandler, { passive: true, once: true });
+    window.addEventListener('touchstart', mobileThreeStartHandler, { passive: true, once: true });
+    window.addEventListener('scroll', mobileThreeStartHandler, { passive: true, once: true });
+    window.addEventListener('keydown', mobileThreeStartHandler, { once: true });
+    return;
   }
+
+  startWhenReady();
 });
 
 onBeforeUnmount(() => {
+  if (subtitleEnhanceTimeoutId !== null) {
+    window.clearTimeout(subtitleEnhanceTimeoutId);
+  }
   if ('requestIdleCallback' in window) {
     if (initIdleId !== null) {
       window.cancelIdleCallback(initIdleId);
@@ -256,6 +283,12 @@ onBeforeUnmount(() => {
   }
   if (initTimeoutId !== null) {
     window.clearTimeout(initTimeoutId);
+  }
+  if (mobileThreeStartHandler) {
+    window.removeEventListener('pointerdown', mobileThreeStartHandler);
+    window.removeEventListener('touchstart', mobileThreeStartHandler);
+    window.removeEventListener('scroll', mobileThreeStartHandler);
+    window.removeEventListener('keydown', mobileThreeStartHandler);
   }
   cleanup();
 });
@@ -330,6 +363,10 @@ onBeforeUnmount(() => {
 .hero-s {
   font-size: 22px;
   margin-top: 8px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .35);
+}
+
+.hero-s--enhanced {
   -webkit-text-stroke: 0.4px rgba(0, 0, 0, .55);
   text-shadow:
     1px 5px 16px rgba(0, 0, 0, .7),
