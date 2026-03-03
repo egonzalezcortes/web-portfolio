@@ -50,8 +50,12 @@ npm run build:staging
 
 - Analytics initializes only when all of the following are true:
   - build is production (`import.meta.env.PROD`)
-  - `VITE_GA_MEASUREMENT_ID` is set
+  - `VITE_ANALYTICS_PROVIDER` is configured (`simple`, `ga4`, or `none`)
   - current hostname is in `VITE_ANALYTICS_HOSTS`
+- Provider notes:
+  - `simple` loads `https://scripts.simpleanalyticscdn.com/latest.js`
+  - `ga4` requires `VITE_GA_MEASUREMENT_ID`
+  - `none` disables analytics
 - Configure values in:
   - `.env.production`
   - `.env.staging`
