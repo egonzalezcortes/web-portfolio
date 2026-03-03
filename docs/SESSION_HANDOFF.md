@@ -205,3 +205,27 @@ npx --yes lighthouse@12.8.2 http://localhost:4177 \
   - production-only activation
   - disabled in staging
   - verify runtime behavior on both hosts.
+
+### Analytics completion status (2026-03-03)
+
+- Analytics provider abstraction implemented in app runtime (`simple | ga4 | none`).
+- Current selected strategy:
+  - production: `simple`
+  - staging: `none`
+- Environment templates added:
+  - `.env.example`
+  - `.env.production.example`
+  - `.env.staging.example`
+- Actual envs updated for current deployment flow:
+  - `.env.production` uses `VITE_ANALYTICS_PROVIDER=simple`
+  - `.env.staging` uses `VITE_ANALYTICS_PROVIDER=none`
+- Build validation complete for both modes:
+  - `npm run build`
+  - `npm run build:staging`
+- Runtime verification completed by user with Simple Analytics dashboard showing script installation state.
+
+### Recommended next actions (new)
+
+1. Let production traffic settle (Simple Analytics may take some time for first visible data depending on browser/privacy settings).
+2. Add a short release runbook section in docs for repeatable staging -> production promotions.
+3. (Optional) Add CI automation for deploy scripts (`develop` -> staging, `main` -> production).

@@ -171,3 +171,40 @@ This session focused on performance, rendering-path optimization, and production
 - Staging is reachable, HTTPS-valid, and non-indexable.
 - Production and staging deploy paths are separated and functioning.
 - Next planned task: finalize analytics implementation/verification (production on, staging off).
+
+---
+
+## Final continuation updates (2026-03-03, analytics completed)
+
+### 1) Analytics architecture implemented
+
+- Reworked analytics bootstrapping to provider-based runtime selection:
+  - `simple` (Simple Analytics script)
+  - `ga4` (Google Analytics 4 via Measurement ID)
+  - `none` (disabled)
+- Kept existing host and production gating safeguards:
+  - production-only execution path
+  - hostname allow-list check
+
+### 2) Environment configuration finalized
+
+- Updated actual runtime envs:
+  - `.env.production` -> `VITE_ANALYTICS_PROVIDER=simple`
+  - `.env.staging` -> `VITE_ANALYTICS_PROVIDER=none`
+- Added committable env templates:
+  - `.env.example`
+  - `.env.production.example`
+  - `.env.staging.example`
+
+### 3) Validation
+
+- Confirmed builds pass for both targets:
+  - `npm run build`
+  - `npm run build:staging`
+- User verified Simple Analytics installation process and initial dashboard detection state.
+
+### 4) Operational outcome
+
+- Production analytics enabled with Simple Analytics.
+- Staging analytics intentionally disabled.
+- Staging/prod deployment and indexing controls remain in healthy state.
