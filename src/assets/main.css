@@ -74,6 +74,7 @@ section {
 .glitch-hero {
   position: relative;
   animation: glitch-cyber-base 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
 }
 
 .glitch-title {
@@ -102,6 +103,7 @@ section {
   color: var(--accent-cyan);
   transform: translate(-1px, 0);
   animation: glitch-cyber-a 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
 }
 
 .glitch-title::after,
@@ -109,6 +111,31 @@ section {
   color: var(--accent-synth);
   transform: translate(1px, 0);
   animation: glitch-cyber-b 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
+}
+
+#home {
+  --glitch-delay: 0s;
+}
+
+#about {
+  --glitch-delay: -0.85s;
+}
+
+#competencies {
+  --glitch-delay: -1.7s;
+}
+
+#experience {
+  --glitch-delay: -2.55s;
+}
+
+#production {
+  --glitch-delay: -3.4s;
+}
+
+#contact {
+  --glitch-delay: -4.25s;
 }
 
 .glitch-hero::before {
