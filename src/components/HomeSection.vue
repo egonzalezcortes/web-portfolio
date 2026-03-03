@@ -309,7 +309,7 @@ onBeforeUnmount(() => {
   width: 100%;
   text-align: left;
   line-height: 1em;
-  text-shadow: 1px 3px 11px rgba(0, 0, 0, .5);
+  text-shadow: 1px 4px 14px rgba(0, 0, 0, .62);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 2.2px;
@@ -320,11 +320,20 @@ onBeforeUnmount(() => {
   font-size: clamp(4rem, 7.5vw, 6.25rem);
   line-height: 0.95;
   margin-left: 0;
+  font-weight: 700;
+  -webkit-text-stroke: 0.4px rgba(0, 0, 0, .55);
+  text-shadow:
+    1px 5px 16px rgba(0, 0, 0, .7),
+    0 1px 0 rgba(0, 0, 0, .45);
 }
 
 .hero-s {
   font-size: 22px;
   margin-top: 8px;
+  -webkit-text-stroke: 0.4px rgba(0, 0, 0, .55);
+  text-shadow:
+    1px 5px 16px rgba(0, 0, 0, .7),
+    0 1px 0 rgba(0, 0, 0, .45);
 }
 
 @media (max-width: 962px) {
@@ -335,10 +344,14 @@ onBeforeUnmount(() => {
   .hero-h {
     font-size: 3em;
     margin-left: 0;
+    text-shadow:
+      1px 5px 16px rgba(0, 0, 0, .7),
+      0 1px 0 rgba(0, 0, 0, .45);
   }
 
   .hero-s {
     font-size: 1.5em;
+    text-shadow: 1px 4px 14px rgba(0, 0, 0, .7);
   }
 }
 </style>
