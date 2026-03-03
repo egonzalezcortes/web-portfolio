@@ -34,6 +34,16 @@ npm run build
 npm run lint
 ```
 
+## Favicons
+
+- Source favicon files live in `public/favicons/`.
+- The app head links are defined in `index.html` and point to files in `public/favicons/`.
+- Keep the root fallback in sync for direct `/favicon.ico` requests:
+
+```sh
+cp public/favicons/favicon.ico public/favicon.ico
+```
+
 ## Staging and analytics
 
 ### Build modes
