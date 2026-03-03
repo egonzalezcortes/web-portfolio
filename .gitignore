@@ -31,3 +31,15 @@ coverage
 
 # Temporary Lighthouse outputs (keep curated reports under docs/perf/lighthouse)
 tmp/lighthouse/
+
+# Local/server-specific nginx configs
+docs/nginx-staging.egonzalezcortes.com.conf
+docs/nginx-production.egonzalezcortes.com.conf
+
+.env*
+!.env.example
+!.env.production.example
+!.env.staging.example
+
+# Optional local-only deploy script variants
+scripts/deploy-*.local.sh

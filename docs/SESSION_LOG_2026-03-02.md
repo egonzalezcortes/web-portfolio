@@ -127,3 +127,47 @@ This session focused on performance, rendering-path optimization, and production
 
 - Repeated `npm run build` checks after each major change completed successfully.
 - Final state is deployable; next validation step remains median Lighthouse runs post-deploy.
+
+---
+
+## Continuation updates (2026-03-03)
+
+### 1) Staging domain operationalized
+
+- Set up staging subdomain and Nginx vhost for `staging.egonzalezcortes.com`.
+- Completed cert issuance and HTTPS activation for staging.
+- Fixed certificate mismatch by pointing staging vhost to staging-specific cert paths.
+
+### 2) Staging indexing controls verified
+
+- Added/validated staging-specific `robots.txt` behavior via Nginx response override (`Disallow: /`).
+- Ensured `X-Robots-Tag: noindex, nofollow, noarchive` is present in responses.
+- Resolved header inheritance issue by adding the robots header in relevant location blocks.
+
+### 3) Nginx conflict debugging resolved
+
+- Diagnosed conflicting server blocks (`default` and staging definitions overlapping).
+- Removed/disabled conflicting entries so one authoritative staging vhost serves the domain.
+- Result: stable and predictable staging behavior.
+
+### 4) Deploy script UX and reliability updates
+
+- Updated `scripts/deploy-staging.sh` and `scripts/deploy-prod.sh` to:
+  - work from any current directory (absolute repo-root handling)
+  - accept positional `user@server`
+  - keep fixed deploy targets per environment:
+    - staging `/var/www/egonzalezcortes-staging`
+    - production `/var/www/egonzalezcortes.com`
+
+### 5) Nginx documentation hygiene
+
+- Added local server-specific docs for active envs and ignored them in git.
+- Added sanitized committed templates:
+  - `docs/nginx-staging.example.conf`
+  - `docs/nginx-production.example.conf`
+
+### 6) Current status and next work
+
+- Staging is reachable, HTTPS-valid, and non-indexable.
+- Production and staging deploy paths are separated and functioning.
+- Next planned task: finalize analytics implementation/verification (production on, staging off).

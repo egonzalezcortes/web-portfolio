@@ -161,3 +161,47 @@ npx --yes lighthouse@12.8.2 http://localhost:4177 \
   --only-categories=performance,accessibility,best-practices,seo \
   --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
 ```
+
+## Continuation addendum (2026-03-03)
+
+### Staging environment status
+
+- DNS + TLS for `staging.egonzalezcortes.com` configured and working.
+- Active staging root is `/var/www/egonzalezcortes-staging`.
+- Staging now runs without basic auth (public staging), by intent.
+- Staging anti-indexing protections validated:
+  - `robots.txt` returns `Disallow: /`
+  - `X-Robots-Tag: noindex, nofollow, noarchive` present in responses.
+
+### Nginx conflict troubleshooting completed
+
+- Root cause of prior inconsistencies was duplicate staging server blocks from the default site.
+- Resolution path:
+  - removed/disabled conflicting default staging blocks
+  - ensured dedicated staging vhost handles the domain
+  - corrected staging cert path to `/etc/letsencrypt/live/staging.egonzalezcortes.com/...`
+
+### Deploy script improvements completed
+
+- `scripts/deploy-staging.sh` and `scripts/deploy-prod.sh` now:
+  - resolve repo root automatically (work from any cwd)
+  - accept positional `user@server`
+  - deploy to hard-coded target dirs:
+    - staging -> `/var/www/egonzalezcortes-staging`
+    - production -> `/var/www/egonzalezcortes.com`
+
+### Nginx docs in repo
+
+- Local server-specific configs stored in docs and gitignored:
+  - `docs/nginx-staging.egonzalezcortes.com.conf`
+  - `docs/nginx-production.egonzalezcortes.com.conf`
+- Sanitized committed examples added:
+  - `docs/nginx-staging.example.conf`
+  - `docs/nginx-production.example.conf`
+
+### Immediate next step
+
+- Implement analytics rollout safely:
+  - production-only activation
+  - disabled in staging
+  - verify runtime behavior on both hosts.
