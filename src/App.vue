@@ -9,6 +9,8 @@
     <ExperienceSection />
     <SectionWaveDivider top-color="var(--vt-c-black)" bottom-color="var(--vt-c-black-soft)" />
     <ProductionSection />
+    <SectionWaveDivider top-color="var(--vt-c-black-soft)" bottom-color="var(--vt-c-black)" />
+    <ContactSection />
   </main>
 </template>
 
@@ -20,4 +22,5 @@ import SectionWaveDivider from './components/SectionWaveDivider.vue';
 import CompetenciesSection from './components/CompetenciesSection.vue';
 import ExperienceSection from './components/ExperienceSection.vue';
 import ProductionSection from './components/ProductionSection.vue';
+import ContactSection from './components/ContactSection.vue';
 </script>

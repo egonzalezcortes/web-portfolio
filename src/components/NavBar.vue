@@ -22,6 +22,12 @@
           <li class="site-item">
             <a class="site-link" href="#experience" @click="handleNavClick">/experience</a>
           </li>
+          <li class="site-item">
+            <a class="site-link" href="#production" @click="handleNavClick">/production</a>
+          </li>
+          <li class="site-item">
+            <a class="site-link" href="#contact" @click="handleNavClick">/contact</a>
+          </li>
         </ul>
       </div>
     </div>
