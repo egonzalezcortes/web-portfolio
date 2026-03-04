@@ -11,22 +11,22 @@
       <div class="site-menu" id="mainNavbar" :class="{ show: isNavOpen }">
         <ul class="site-links">
           <li class="site-item">
-            <a class="site-link" href="#home" @click="handleNavClick">/home</a>
+            <a class="site-link" href="#home" @click="handleNavClick($event, 'home')">/home</a>
           </li>
           <li class="site-item">
-            <a class="site-link" href="#about" @click="handleNavClick">/about</a>
+            <a class="site-link" href="#about" @click="handleNavClick($event, 'about')">/about</a>
           </li>
           <li class="site-item">
-            <a class="site-link" href="#competencies" @click="handleNavClick">/competencies</a>
+            <a class="site-link" href="#competencies" @click="handleNavClick($event, 'competencies')">/competencies</a>
           </li>
           <li class="site-item">
-            <a class="site-link" href="#experience" @click="handleNavClick">/experience</a>
+            <a class="site-link" href="#experience" @click="handleNavClick($event, 'experience')">/experience</a>
           </li>
           <li class="site-item">
-            <a class="site-link" href="#production" @click="handleNavClick">/production</a>
+            <a class="site-link" href="#production" @click="handleNavClick($event, 'production')">/production</a>
           </li>
           <li class="site-item">
-            <a class="site-link" href="#contact" @click="handleNavClick">/contact</a>
+            <a class="site-link" href="#contact" @click="handleNavClick($event, 'contact')">/contact</a>
           </li>
         </ul>
       </div>
@@ -37,15 +37,38 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
+import { home, about, competencies, contact, experience, production } from '@/assets/sounds/index.js';
+
 const isNavOpen = ref(false);
 const isScrolled = ref(false);
 const navRef = ref(null);
+
+const sounds = {
+  home: new Audio(home),
+  about: new Audio(about),
+  competencies: new Audio(competencies),
+  contact: new Audio(contact),
+  experience: new Audio(experience),
+  production: new Audio(production)
+};
+
+Object.values(sounds).forEach(a => { a.preload = 'auto'; a.volume = 0.2; });
+
+const play = (name) => {
+  const a = sounds[name];
+  if (!a) return;
+  a.currentTime = 0;
+  a.play().catch(() => { });
+};
 
 const toggleNav = () => {
   isNavOpen.value = !isNavOpen.value;
 };
 
-const handleNavClick = (event) => {
+const handleNavClick = (event, soundName) => {
+  console.log(soundName)
+  if (soundName) play(soundName);
+
   const target = event.currentTarget?.getAttribute('href');
 
   if (target?.startsWith('#')) {
