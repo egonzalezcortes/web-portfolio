@@ -11,7 +11,7 @@
     </picture>
     <div id="hero">
       <h1 class="hero-h glitch-hero" data-text="Edgar Xavier">Edgar Xavier</h1>
-      <h2 class="hero-s" :class="{ 'hero-s--enhanced': heroSubtitleEnhanced }">Full Stack Software Engineer</h2>
+      <h2 class="hero-s hero-s--enhanced">Full Stack Software Engineer</h2>
     </div>
     <div ref="canvasContainer" id="home-canvas"></div>
     <span class="transparent_gradient"></span>
@@ -31,7 +31,6 @@ let threeDeps = null;
 
 const canvasContainer = ref(null);
 const figures = ref([]);
-const heroSubtitleEnhanced = ref(false);
 let scene, camera, renderer;
 let initTimeoutId = null;
 let initIdleId = null;
@@ -202,10 +201,6 @@ const initThreeScene = async () => {
 };
 
 onMounted(() => {
-  subtitleEnhanceTimeoutId = window.setTimeout(() => {
-    heroSubtitleEnhanced.value = true;
-  }, 1400);
-
   const reducedMotion = prefersReducedMotion();
   const saveData = hasSaveData();
   const desktopLayout = isDesktopLayout();

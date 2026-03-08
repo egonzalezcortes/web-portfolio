@@ -3,13 +3,13 @@
     <h2 class="section-title glitch-title" data-text="About Me">About Me</h2>
 
     <div class="about-container section-inner">
+      <p class="bio-text intro-text">I’m a full-stack software engineer with 6+ years of experience helping teams build
+        reliable web applications. I work across the stack—from user interfaces to backend systems—turning complex
+        requirements into software that is secure, maintainable, and built to last.
+      </p>
       <p class="bio-text intro-text">
-        Full-stack software engineer with 6+ years of experience building secure, high-reliability web systems in
-        regulated and mission-critical environments. Experienced in designing privacy-conscious architectures,
-        evolving
-        complex front-end/back-end integrations, and improving system maintainability under real-world operational
-        constraints. Strong ownership mindset with a track record of leading migrations, improving performance, and
-        collaborating closely across teams.
+        I enjoy working in small, collaborative teams where engineers bring complementary strengths and solve difficult
+        problems together.
       </p>
 
       <h2 class="about-subtitle">How I Build Software</h2>
@@ -17,14 +17,26 @@
       <div class="principles-grid">
         <SurfaceCard accent="var(--accent-cyan)">
           <p class="principle-text">
-            I approach software as a set of interconnected systems rather than isolated features. I value clear
-            boundaries between layers, predictable data flow, and designs that scale in complexity without collapsing
-            under maintenance.
+            I approach software as a set of interconnected systems rather than isolated features. When applications
+            grow, complexity grows with them, so I focus on designing systems that remain understandable and
+            maintainable over time.
+          </p>
+        </SurfaceCard>
+      </div>
+
+      <h2 class="about-subtitle">How I Work With Teams</h2>
+
+      <div class="principles-grid">
+        <SurfaceCard accent="var(--accent-matrix)">
+          <p class="principle-text">
+            The best software I’ve built has come from small, collaborative teams where people bring different strengths
+            to the table. I value environments where engineers communicate openly, challenge ideas constructively, and
+            take shared ownership of the systems they build.
           </p>
           <p class="principle-text">
-            I prefer explicit contracts, well-defined ownership, and thoughtful trade-offs over quick abstractions. For
-            me, shipping software includes considering reliability, data integrity, and how future developers will
-            reason about the system.
+            My background in the military shaped how I approach teamwork: clear communication, trust, and
+            accountability. I enjoy helping teams stay aligned and focused on solving the real
+            problem behind the software we build.
           </p>
         </SurfaceCard>
       </div>
@@ -62,7 +74,7 @@ import SurfaceCard from './SurfaceCard.vue';
 .about-subtitle {
   text-align: center;
   font-size: 2rem;
-  margin-bottom: 14px;
+  margin: 2em 0 .5em;
   color: #f5f5f5;
   text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.55);
 }
@@ -83,6 +95,7 @@ import SurfaceCard from './SurfaceCard.vue';
   font-size: 1rem;
   line-height: 1.75;
   opacity: 0.97;
+  margin: 14px 0;
 }
 
 @media (max-width: 562px) {
