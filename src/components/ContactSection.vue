@@ -10,7 +10,7 @@
 
         <p class="contact-text">
           Email:
-          <a class="contact-link" href="mailto:egonzalezcortes@gmail.com">exgc12@gmail.com</a>
+          <a class="contact-link" href="mailto:exgc12@gmail.com">exgc12@gmail.com</a>
         </p>
 
         <p class="contact-text">

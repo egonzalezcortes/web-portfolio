@@ -10,16 +10,16 @@
         </div>
         <ul class="competency-list">
           <li>
-            REST API design and contract definition
+            Multi-client API design with strict backward compatibility
           </li>
           <li>
-            Relational schema modeling in PostgreSQL
+            GraphQL query optimization and overfetch reduction
           </li>
           <li>
-            Query optimization and indexing strategies
+            Multi-tenant schema modeling with complex permission hierarchies
           </li>
           <li>
-            Transaction-aware backend logic
+            Offline/online state sync across distributed data layers
           </li>
         </ul>
       </article>
@@ -30,22 +30,23 @@
           <TechBadge v-for="tech in frontendTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
         <ul class="competency-list">
-          <li>Component-driven architecture in Vue and React</li>
-          <li>State synchronization across complex UI flows</li>
-          <li>Performance optimization and rendering efficiency</li>
+          <li>Legacy framework migration with zero functionality regression</li>
+          <li>High-frequency data stream throttling for real-time interfaces</li>
+          <li>Rendering performance optimization in large dataset components</li>
+          <li>Dynamic form systems with variable input types and PDF output</li>
         </ul>
       </article>
 
       <article class="competency-card competency-card--cloud">
-        <h3 class="competency-title">Cloud & Infrastructure</h3>
+        <h3 class="competency-title">Infrastructure & Deployment</h3>
         <div class="tech-row">
           <TechBadge v-for="tech in cloudTech" :key="tech.label" :icon="tech.icon" :label="tech.label" />
         </div>
         <ul class="competency-list">
-          <li>Linux server provisioning and maintenance</li>
-          <li>Nginx reverse proxy configuration</li>
-          <li>AWS S3 integration and IAM policy management</li>
-          <li>Deployment and environment isolation</li>
+          <li>Linux server provisioning and reverse proxy configuration</li>
+          <li>SSL termination, firewall management, and environment isolation</li>
+          <li>AWS S3 asset storage with least-privilege IAM policies</li>
+          <li>CI/CD pipeline setup and containerized deployments</li>
         </ul>
       </article>
     </div>

@@ -10,17 +10,10 @@
 
         <p class="production-text">
           I manage my own Linux server environment on DigitalOcean, handling provisioning, deployment, and security
-          configuration for personal applications.
-        </p>
-
-        <p class="production-text">
-          This includes configuring Nginx as a reverse proxy, managing SSL certificates, enforcing firewall rules, and
-          maintaining system updates. I treat deployment as part of the engineering process, not an afterthought.
-        </p>
-
-        <p class="production-text">
-          Owning infrastructure decisions has strengthened my understanding of networking boundaries, runtime
-          environments, and operational responsibility.
+          configuration for personal applications. This includes configuring Nginx as a reverse proxy, managing SSL
+          certificates, enforcing firewall rules, and maintaining system updates. I treat deployment as part of the
+          engineering process, not an afterthought. Owning infrastructure decisions has strengthened my understanding of
+          networking boundaries, runtime environments, and operational responsibility.
         </p>
       </SurfaceCard>
     </div>
