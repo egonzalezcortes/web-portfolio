@@ -40,7 +40,7 @@ echo "[3/5] Creating target directory on server"
 ssh ${SSH_OPTS} "${REMOTE}" "mkdir -p '${TARGET_DIR}'"
 
 echo "[4/5] Syncing build artifacts"
-rsync -az --delete -e "ssh ${SSH_OPTS}" "${REPO_DIR}/dist/" "${REMOTE}:${TARGET_DIR}/"
+rsync -az --delete -e "ssh ${SSH_OPTS}" "${REPO_DIR}/.output/public/" "${REMOTE}:${TARGET_DIR}/"
 
 echo "[5/5] Deploy complete"
 echo "Staging URL should now serve content from: ${TARGET_DIR}"
