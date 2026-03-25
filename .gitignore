@@ -43,3 +43,8 @@ docs/nginx-production.egonzalezcortes.com.conf
 
 # Optional local-only deploy script variants
 scripts/deploy-*.local.sh\n# Nuxt build artifacts\n.nuxt/\n.output/\n.temp-nuxt/
+
+# Nuxt build artifacts
+.nuxt/
+.output/
+.temp-nuxt/
