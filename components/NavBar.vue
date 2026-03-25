@@ -2,12 +2,10 @@
   <nav ref="navRef" class="site-nav navbar-custom" :class="{ 'navbar-scrolled': isScrolled || isNavOpen }">
     <div class="site-nav-inner">
       <a class="site-brand" href="#home">Edgar X. Gonzalez-Cortes</a>
-
       <button class="site-toggle" type="button" @click="toggleNav" aria-controls="mainNavbar"
         :aria-expanded="String(isNavOpen)" aria-label="Toggle navigation" :class="{ collapsed: !isNavOpen }">
         <span class="site-toggle-icon" aria-hidden="true">{{ isNavOpen ? '✕' : '☰' }}</span>
       </button>
-
       <div class="site-menu" id="mainNavbar" :class="{ show: isNavOpen }">
         <ul class="site-links">
           <li class="site-item">
@@ -36,23 +34,12 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-
 import { home, about, competencies, contact, experience, production } from '@/assets/sounds/index.js';
 
 const isNavOpen = ref(false);
 const isScrolled = ref(false);
 const navRef = ref(null);
-
-const sounds = {
-  home: new Audio(home),
-  about: new Audio(about),
-  competencies: new Audio(competencies),
-  contact: new Audio(contact),
-  experience: new Audio(experience),
-  production: new Audio(production)
-};
-
-Object.values(sounds).forEach(a => { a.preload = 'auto'; a.volume = 0.2; });
+let sounds = {};
 
 const play = (name) => {
   const a = sounds[name];
@@ -66,11 +53,8 @@ const toggleNav = () => {
 };
 
 const handleNavClick = (event, soundName) => {
-  console.log(soundName)
   if (soundName) play(soundName);
-
   const target = event.currentTarget?.getAttribute('href');
-
   if (target?.startsWith('#')) {
     event.preventDefault();
     const section = document.querySelector(target);
@@ -78,13 +62,11 @@ const handleNavClick = (event, soundName) => {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
-
   isNavOpen.value = false;
 };
 
 const handleDocumentClick = (event) => {
   if (!isNavOpen.value) return;
-
   const navElement = navRef.value;
   if (navElement && !navElement.contains(event.target)) {
     isNavOpen.value = false;
@@ -96,6 +78,15 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  sounds = {
+    home: new Audio(home),
+    about: new Audio(about),
+    competencies: new Audio(competencies),
+    contact: new Audio(contact),
+    experience: new Audio(experience),
+    production: new Audio(production)
+  };
+  Object.values(sounds).forEach(a => { a.preload = 'auto'; a.volume = 0.2; });
   document.addEventListener('click', handleDocumentClick);
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
