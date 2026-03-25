@@ -11,3 +11,5 @@
 [2026-03-25] — Mobile CSS readability fixes for hero and section titles — components/HomeSection.vue, assets/css/main.css
 [2026-03-25] — Docs audit rewrite for session navigation reliability — docs/APP_FLOW.md, docs/SESSION_HANDOFF.md, docs/WORK_LOG.md
 [2026-03-25] — Nuxt dev warning cleanup: removed unused layout, set compatibilityDate, and pre-bundled three — layouts/default.vue, nuxt.config.ts
+[2026-03-25] — Added docs lighthouse ignore and committed Copilot prompts doc — .gitignore, docs/COPILOT_PROMPTS.md
+[2026-03-25] — Re-validated lighthouse ignore and Copilot prompts commits; no new commits required — .gitignore, docs/COPILOT_PROMPTS.md
