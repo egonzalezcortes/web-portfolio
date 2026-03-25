@@ -9,8 +9,8 @@
         </div>
 
         <p class="production-text">
-          I manage my own Linux server environment on DigitalOcean, handling provisioning, deployment, and security
-          configuration for personal applications. This includes configuring Nginx as a reverse proxy, managing SSL
+          Most engineers don't own their infrastructure. I do. This includes configuring Nginx as a reverse proxy,
+          managing SSL
           certificates, enforcing firewall rules, and maintaining system updates. I treat deployment as part of the
           engineering process, not an afterthought. Owning infrastructure decisions has strengthened my understanding of
           networking boundaries, runtime environments, and operational responsibility.

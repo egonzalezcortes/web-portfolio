@@ -5,7 +5,7 @@
     <div class="contact-container section-inner">
       <SurfaceCard as="div" accent="var(--accent-cyan)">
         <p class="contact-text">
-          Open to software engineering opportunities, technical collaboration, and consulting conversations.
+          If you're building something serious and need a senior engineer, I'd like to talk.
         </p>
 
         <p class="contact-text">

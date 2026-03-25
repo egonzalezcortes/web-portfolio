@@ -15,7 +15,7 @@
         cannot fail.
       </p>
 
-      <h2 class="about-subtitle">How I Build Software</h2>
+      <h2 class="about-subtitle">On Engineering</h2>
 
       <div class="principles-grid">
         <SurfaceCard accent="var(--accent-cyan)">
@@ -32,7 +32,7 @@
         </SurfaceCard>
       </div>
 
-      <h2 class="about-subtitle">How I Work With Teams</h2>
+      <h2 class="about-subtitle">How I Lead</h2>
 
       <div class="principles-grid">
         <SurfaceCard accent="var(--accent-matrix)">

@@ -11,7 +11,8 @@
     </picture>
     <div id="hero">
       <h1 class="hero-h glitch-hero" data-text="Edgar Xavier">Edgar Xavier</h1>
-      <h2 class="hero-s hero-s--enhanced">Full Stack Software Engineer</h2>
+      <h2 class="hero-s hero-s--enhanced">I've shipped software that cannot fail. Now I'm looking for the next hard
+        problem.</h2>
     </div>
     <div ref="canvasContainer" id="home-canvas"></div>
     <span class="transparent_gradient"></span>
