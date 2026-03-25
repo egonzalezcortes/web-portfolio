@@ -1,68 +1,30 @@
 # Session Handoff
 
-Date: 2026-03-02
-Project: `web-porfolio` (Vue 3 + Vite)
+Date: 2026-03-25
+Project: web-porfolio (Nuxt 3 SSG migration — in progress)
 
-## Current state (ready to continue)
+## Current state
 
-- Performance optimization pass completed; latest Lighthouse run in this workspace reached:
+Nuxt 3 SSG migration is functionally complete and statically generated. The `.output/public/` build renders locally with navbar, footer, all sections, Three.js animation, and section sound effects. Example Nginx configs were updated for static serving and a headless Lighthouse baseline was recorded locally.
 
-  # Session Handoff
+## Completed steps
 
-  Date: 2026-03-24
-  Project: `web-porfolio` (migrating from Vue 3 + Vite SPA to Nuxt 3 SSG)
+- Steps 1-7, 11 — done and committed
+- Step 8 — Updated `docs/nginx-production.example.conf` and `docs/nginx-staging.example.conf` to serve `.output/public/`, changed `try_files` to serve prerendered HTML, and added a `/_nuxt/` cache block.
+- Step 9 — Headless Lighthouse baseline run completed locally; reports saved to `docs/lighthouse/`.
 
-  ## What I did in this session
+## Lighthouse baseline (recorded)
 
-  - Initialized Nuxt 3 SSG support by creating configuration and supporting files (scaffold step attempted with `npx nuxi init` but run was interactive in this environment; created config files manually to match a minimal Nuxt scaffold).
-  - Added the following files to the project root and assets:
-    - `nuxt.config.ts` (SSG / prerender config, runtime public config bindings, head preloads for fonts + hero images)
-    - `tsconfig.json`
-    - `.nuxtignore`
-    - `assets/css/main.css` (copied from `src/assets/main.css`)
-    - `assets/css/base.css` (copied from `src/assets/base.css`)
-  - Installed Nuxt into the project by running `npm install nuxt@latest --save` and `npm install` (this added Nuxt to `package.json` and installed node modules).
+- Mobile — Performance: 97 | LCP: 2.50s | TBT: 6ms | CLS: 0.000
+- Desktop — Performance: 100 | LCP: 0.54s | TBT: 0ms | CLS: 0.000
 
-  Notes about safety & constraints followed:
+Files created/updated during Session C:
 
-  - Did NOT modify or delete `src/`, `vite.config.js`, or `index.html`.
-  - Did NOT create `pages/`, `components/`, or `app.vue` (Session B will handle component/page migration).
-  - Did NOT run `nuxi build` or `nuxi generate` — only ran `npx nuxi info` to validate the environment.
-  - Did not initialize a new git repo.
+- Updated: `docs/nginx-production.example.conf`, `docs/nginx-staging.example.conf`
+- Created: `docs/lighthouse/index-2026-03-24-mobile.json`, `docs/lighthouse/index-2026-03-24-desktop.json`
 
-  ## Files created or modified in this session
+## Remaining steps / Next task
 
-  - Created: `nuxt.config.ts`
-  - Created: `tsconfig.json`
-  - Created: `.nuxtignore`
-  - Created: `assets/css/main.css` (copy)
-  - Created: `assets/css/base.css` (copy)
-  - Modified: `package.json` (added `nuxt` dependency)
-  - Modified: `node_modules/` via `npm install`
+- Session D — Cleanup legacy Vite files (`src/`, `vite.config.js`, `index.html`, `.temp-nuxt/`), deploy to staging and verify, then deploy to production, and regenerate `docs/APP_FLOW.md` (Step 10, 12, 13).
 
-  ## Verification
-
-  - Ran `npx nuxi info` — Nuxt recognized the project and reported Nuxt/Nitro versions; no fatal config error was produced in this environment.
-
-  ## Next task (Session B)
-
-  - Migrate components and `pages/index.vue` to Nuxt app structure, implement `app.vue` and `layouts/default.vue`, and validate SSG generation with `nuxi generate`.
-
-  ## Session B (2026-03-24) — Components & Pages Migration
-
-  - Created Nuxt entry files and pages:
-    - `app.vue` (delegates to Nuxt pages)
-    - `layouts/default.vue` (uses existing `NavBar` and `SiteFooter` components)
-    - `pages/index.vue` (composes `HomeSection`, `AboutSection`, `CompetenciesSection`, `ExperienceSection`, `ProductionSection`, `ContactSection` by importing from `src/components`)
-  - Adjustments made to support SSG:
-    - Updated `src/components/HomeSection.vue` to reference public images (`/images/...`) instead of missing `src/assets/imgs/` imports.
-    - Added `assets/css/` copies of `main.css` and `base.css` in Session A.
-    - Created `assets/sounds/index.js` (stubbed exports) to avoid bundling missing audio binaries during generation; real audio files remain in `src/assets/sounds/` and will be migrated later.
-    - Copied tech icon SVGs from `src/assets/tech-icons/` into `assets/tech-icons/` so SVG imports resolve during build.
-  - Ran `npx nuxi generate` to validate SSG — generation completed successfully and `.output/public` was produced.
-
-  ## Next task (Session C)
-
-  - Replace stubbed sound assets with real files in `assets/` or update imports to point at `public/` as desired.
-  - Move `src/components/*` into Nuxt `components/` and convert any remaining Vite-specific imports.
-  - Review image/font references and remove `src/` leftovers when ready to delete the old Vite SPA files.
+Stop condition: Session D work to begin next; no deployment performed in this session.
