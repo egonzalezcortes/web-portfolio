@@ -6,6 +6,7 @@ Project: `web-porfolio` (Vue 3 + Vite)
 ## Current state (ready to continue)
 
 - Performance optimization pass completed; latest Lighthouse run in this workspace reached:
+
   # Session Handoff
 
   Date: 2026-03-24

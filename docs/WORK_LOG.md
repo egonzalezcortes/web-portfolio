@@ -1,9 +1,9 @@
 # Work Log
 
 - 2026-03-24: Moved Lighthouse reports from `docs/perf/lighthouse/` to `docs/lighthouse/` and standardized folder layout.
-[2026-03-24] — Step 2: Lighthouse folder standardized — moved JSON reports from docs/perf/lighthouse/ to docs/lighthouse/
-[2026-03-24] — Step 6: Images moved to public/images/ — src/assets/imgs/ removed
-[2026-03-24] — Step 7: VITE_ renamed to NUXT_PUBLIC_ in .env example files
-[2026-03-24] — Step 11: Deploy scripts updated — dist/ replaced with .output/public/
-[2026-03-24] — Step 3: Nuxt 3 SSG initialized — nuxt.config.ts created, dependencies installed, CSS assets copied
-[2026-03-24] — Step 4: Session B migration — created `app.vue`, `layouts/default.vue`, `pages/index.vue`; updated `HomeSection.vue` image paths; ran `nuxi generate` (SSG successful)
+  [2026-03-24] — Step 2: Lighthouse folder standardized — moved JSON reports from docs/perf/lighthouse/ to docs/lighthouse/
+  [2026-03-24] — Step 6: Images moved to public/images/ — src/assets/imgs/ removed
+  [2026-03-24] — Step 7: VITE* renamed to NUXT_PUBLIC* in .env example files
+  [2026-03-24] — Step 11: Deploy scripts updated — dist/ replaced with .output/public/
+  [2026-03-24] — Step 3: Nuxt 3 SSG initialized — nuxt.config.ts created, dependencies installed, CSS assets copied
+  [2026-03-24] — Step 4: Session B migration — created `app.vue`, `layouts/default.vue`, `pages/index.vue`; updated `HomeSection.vue` image paths; ran `nuxi generate` (SSG successful)
