@@ -1,64 +1,61 @@
 # APP_FLOW.md
 
-## Project
+# Last updated: 2026-03-25
 
-Personal portfolio migrated to Nuxt 3 SSG (static site generation); built with Nuxt/Vite and deployed by generating the static output (`.output/public/`) and serving it from an Nginx-hosted Linux server (deploy scripts rsync `.output/public/` to the target host).
+# Purpose: tells Copilot where everything lives. Read this first.
 
-## Stack
+## Business context
 
-- Framework: Nuxt 3 (Vue 3)
-- Build tool: Vite + Nitro prerender (SSG)
-- CSS approach: Plain CSS files (`assets/css/base.css`, `assets/css/main.css`) with custom CSS variables and a self-hosted `Orbitron` font in `/public/fonts/`
-- Deployment target: Linux server (DigitalOcean-like) with Nginx reverse proxy; deploy via `rsync` over SSH (scripts in `scripts/`)
-- Analytics: optional runtime analytics via `src/lib/analytics.js` supporting `simple` or `ga4` providers (configured via `NUXT_PUBLIC_*` runtime env vars)
+This is a Nuxt 3 static portfolio site for Edgar Gonzalez-Cortes, a senior full-stack software engineer. It serves recruiters, hiring managers, and engineering leaders who need fast evidence of production-level experience. The primary goal is to convert technical credibility into interview opportunities and direct contact for senior roles.
+Full strategy context: docs/STRATEGY.md (read only when explicitly needed)
 
-## Entry points
+## Pages — where copy data lives
 
-- `app.vue` — root app wrapper that renders the global `NavBar`, the page content (`<NuxtPage/>`) and `SiteFooter`.
-- `layouts/default.vue` — default layout that includes `NavBar` and `SiteFooter` and wraps page `slot` in a `main` element.
-- `pages/index.vue` — top-level home page that composes the sections: `HomeSection`, `AboutSection`, `CompetenciesSection`, `ExperienceSection`, `ProductionSection`, and `ContactSection`.
+| Page | File | Where copy data is | Notes |
+| ---- | ---- | ------------------ | ----- |
+| Home (/) | pages/index.vue | Page-level composition is in pages/index.vue; h1 and subhead are in components/HomeSection.vue; main copy blocks live inline in components/AboutSection.vue, components/CompetenciesSection.vue, components/ExperienceSection.vue, components/ProductionSection.vue, and components/ContactSection.vue | Single-page layout with section anchors (#home, #about, #competencies, #experience, #production, #contact) |
 
-## Components
+## Components — reusable pieces
 
-- `NavBar.vue` — site navigation bar with toggle, scroll-aware styling, and click-triggered section sound playback.
-- `SiteFooter.vue` — footer with tech badges, back-to-top link, and year copyright.
-- `HomeSection.vue` — hero section with responsive picture sources and a Three.js-powered canvas animation (deferred/opt-in for mobile/low-power devices).
-- `AboutSection.vue` — "About Me" content and `SurfaceCard`-driven principles.
-- `CompetenciesSection.vue` — lists core competencies grouped by Systems, Frontend, and Cloud with `TechBadge` icons.
-- `ExperienceSection.vue` — professional experience cards rendered with `SurfaceCard` and `TechBadge` entries.
-- `ProductionSection.vue` — notes about deployment and infrastructure, lists production tech badges.
-- `ContactSection.vue` — contact block with email and LinkedIn links.
-- `SectionWaveDivider.vue` — decorative SVG wave divider between sections.
-- `SurfaceCard.vue` — reusable card component wrapping content and exposing accent/border/shadow props.
-- `TechBadge.vue` — small badge component that imports SVG icons from `assets/tech-icons/` and displays a label.
-- `components/icons/*` — small inline SVG icon components (`IconDocumentation.vue`, `IconSupport.vue`, `IconEcosystem.vue`, `IconCommunity.vue`, `IconTooling.vue`).
+| Component | File | Used on | Purpose |
+| --------- | ---- | ------- | ------- |
+| AboutSection | components/AboutSection.vue | / | About narrative and engineering/leadership copy blocks |
+| CompetenciesSection | components/CompetenciesSection.vue | / | Skills and capability groupings with tech badges |
+| ContactSection | components/ContactSection.vue | / | Contact CTA, email link, and LinkedIn link |
+| ExperienceSection | components/ExperienceSection.vue | / | Work history cards and impact statements |
+| HomeSection | components/HomeSection.vue | / | Hero heading/subhead, responsive hero image, optional Three.js visual |
+| NavBar | components/NavBar.vue, app.vue, layouts/default.vue | Global | Fixed navigation, mobile menu, smooth-scroll, nav sound effects |
+| ProductionSection | components/ProductionSection.vue | / | Infrastructure/deployment credibility section |
+| SectionWaveDivider | components/SectionWaveDivider.vue | Not currently used on / | Decorative wave divider component for section transitions |
+| SiteFooter | components/SiteFooter.vue, app.vue, layouts/default.vue | Global | Footer with tech stack badges and back-to-top control |
+| SurfaceCard | components/SurfaceCard.vue | AboutSection, ExperienceSection, ProductionSection, ContactSection | Generic card wrapper with style props |
+| TechBadge | components/TechBadge.vue | CompetenciesSection, ExperienceSection, ProductionSection, SiteFooter | Icon + label badge for technologies |
+| IconCommunity | components/icons/IconCommunity.vue | Not currently used on / | Inline SVG icon component |
+| IconDocumentation | components/icons/IconDocumentation.vue | Not currently used on / | Inline SVG icon component |
+| IconEcosystem | components/icons/IconEcosystem.vue | Not currently used on / | Inline SVG icon component |
+| IconSupport | components/icons/IconSupport.vue | Not currently used on / | Inline SVG icon component |
+| IconTooling | components/icons/IconTooling.vue | Not currently used on / | Inline SVG icon component |
 
-## Assets
+## Shared data files
 
-- `assets/css/` — contains `base.css` (root variables, resets, core styles) and `main.css` (imports `base.css`, declares fonts and site layout rules).
-- `assets/sounds/` — `index.js` (exports) plus `.m4a` files: `home.m4a`, `about.m4a`, `competencies.m4a`, `contact.m4a`, `experience.m4a`, `production.m4a` used by `NavBar` and sections.
-- `assets/tech-icons/` — SVG icons referenced by `TechBadge` (examples: `aws.svg`, `digitalocean.svg`, `express.svg`, `linux.svg`, `nginx.svg`, `nodejs.svg`, `postgresql.svg`, `react.svg`, `vue.svg`).
-- `lib/` — `lib/three-home-deps.js` (re-exports Three.js primitives used by `HomeSection`); `src/lib/analytics.js` initializes analytics scripts conditionally.
-- `public/` — notable files: hero/background images (`images/bg-img2-*.avif|.webp|.jpg`), `ex-logo.svg`, `favicons/*` including `site.webmanifest`, `public/fonts/orbitron-latin-600-normal.woff2` and `orbitron-latin-700-normal.woff2`, `robots.txt`, and `sitemap.xml`.
+All copy is inline in Vue files
 
-## Configuration
+## Config files — touch with caution
 
-- `nuxt.config.ts` — configured for SSG via Nitro `prerender` (routes: ['/']), `routeRules` to prerender all routes, `css` entry `~/assets/css/main.css`, `app.head.link` preloads for self-hosted fonts and hero images, and `runtimeConfig.public` keys for analytics: `analyticsProvider`, `analyticsHosts`, `gaMeasurementId` (populated from `NUXT_PUBLIC_*` env vars at build time).
-- Environment variables — `.env.example` exposes the NUXT*PUBLIC*\* keys used in runtime:
-  - `NUXT_PUBLIC_ANALYTICS_PROVIDER` (none | simple | ga4)
-  - `NUXT_PUBLIC_GA_MEASUREMENT_ID` (GA4 ID)
-  - `NUXT_PUBLIC_ANALYTICS_HOSTS` (comma-separated hostnames where analytics is allowed)
+| File | Purpose | When to edit |
+| ---- | ------- | ------------ |
+| nuxt.config.ts | framework config, route rules, SSG preset | route/redirect/module changes only |
+| public/sitemap.xml | sitemap | when adding or removing pages |
+| plugins/analytics.client.ts | Simple Analytics integration | analytics changes only |
 
-## Deploy
+## Deploy workflow
 
-- Build command: `npm run build` (Nuxt/Vite build configured in `package.json`; session notes use `npx nuxi generate` to validate SSG output).
-- Output directory: `.output/public/` (static files to be served by Nginx).
-- Deploy scripts: `scripts/staging-deploy.sh` and `scripts/prod-deploy.sh` — both `rsync` `.output/public/` to the target server directory; `scripts/migrate-to-nuxt.sh` contains idempotent migration steps used during the Nuxt migration.
+1. Make changes locally
+2. npm run generate
+3. ./scripts/deploy.sh
+4. Verify live at https://egonzalezcortes.com
 
-## Docs
+## Known gotchas
 
-- `docs/SESSION_HANDOFF.md` — current session handoff and migration status (lists completed steps and remaining steps; next task Session C: update nginx configs and run Lighthouse baseline).
-- `docs/WORK_LOG.md` — chronological migration/work log entries and step confirmations.
-- `docs/nginx-staging.example.conf` — example Nginx config for staging static serving pattern (shows `root`, caching headers, fonts/assets handling, and redirects to HTTPS).
-- `docs/nginx-production.example.conf` — example Nginx config for production static serving pattern.
-- `docs/lighthouse/` — curated Lighthouse JSON reports for baseline and after-optimizations audits (multiple JSON files used for comparison).
+- ERROR_LOG.md is not present, so there is no historical gotcha list to import.
+- Most files in docs/lighthouse/ are placeholder markers like "(moved)" rather than valid JSON reports; use index-2026-03-24-mobile.json and index-2026-03-24-desktop.json for current valid baselines.

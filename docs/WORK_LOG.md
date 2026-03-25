@@ -1,15 +1,13 @@
-# Work Log
+# WORK_LOG.md
 
-- 2026-03-24: Moved Lighthouse reports from `docs/perf/lighthouse/` to `docs/lighthouse/` and standardized folder layout.
-  [2026-03-24] — Step 2: Lighthouse folder standardized — moved JSON reports from docs/perf/lighthouse/ to docs/lighthouse/
-  [2026-03-24] — Step 6: Images moved to public/images/ — src/assets/imgs/ removed
-  [2026-03-24] — Step 7: VITE* renamed to NUXT_PUBLIC* in .env example files
-  [2026-03-24] — Step 11: Deploy scripts updated — dist/ replaced with .output/public/
-  [2026-03-24] — Step 3: Nuxt 3 SSG initialized — nuxt.config.ts created, dependencies installed, CSS assets copied
-  [2026-03-24] — Step 4: Session B migration — created `app.vue`, `layouts/default.vue`, `pages/index.vue`; updated `HomeSection.vue` image paths; ran `nuxi generate` (SSG successful)
-  [2026-03-24] — NavBar SSR fix + build verification — components/NavBar.vue, .output/public confirmed
-  [2026-03-25] — Steps 8-9: nginx config updated, Lighthouse baseline recorded — docs/nginx-production.example.conf, docs/nginx-staging.example.conf, docs/lighthouse/index-2026-03-24-mobile.json, docs/lighthouse/index-2026-03-24-desktop.json
-  [2026-03-25] — Session D closeout: migration marked complete, legacy Vite files removed, deploy/docs finalized — docs/SESSION_HANDOFF.md
-  [2026-03-25] — SEO fundamentals added: canonical, lang, OG tags, analytics plugin, robots.txt and sitemap verified
-  [2026-03-25] — Copy updates: hero subheader, section headers, production section opener, contact CTA
-  [2026-03-25] — Mobile CSS fixes: hero subheader sizing, gradient overlay, section title responsive font size
+[2026-03-24] — Nuxt 3 SSG scaffold and component migration completed (Session B) — app.vue, layouts/default.vue, pages/index.vue, components/, assets/css/, nuxt.config.ts
+[2026-03-24] — Lighthouse artifacts moved and docs folder layout standardized — docs/lighthouse/, docs/WORK_LOG.md
+[2026-03-24] — Session C migration cleanup: moved sounds to assets/sounds and added Three dependency shim — assets/sounds/, components/HomeSection.vue, lib/three-home-deps.js
+[2026-03-24] — NavBar SSR compatibility fix verified in build output — components/NavBar.vue
+[2026-03-25] — Nginx example configs updated and baseline Lighthouse reports recorded — docs/nginx-production.example.conf, docs/nginx-staging.example.conf, docs/lighthouse/index-2026-03-24-mobile.json, docs/lighthouse/index-2026-03-24-desktop.json
+[2026-03-25] — Migration closeout and deploy script finalization for .output/public deployment — scripts/prod-deploy.sh, scripts/staging-deploy.sh, docs/SESSION_HANDOFF.md
+[2026-03-25] — SEO fundamentals implemented (canonical, OG, html lang, analytics plugin wiring) — nuxt.config.ts, plugins/analytics.client.ts, public/robots.txt, public/sitemap.xml
+[2026-03-25] — Copy revisions applied across homepage sections — components/HomeSection.vue, components/AboutSection.vue, components/ProductionSection.vue, components/ContactSection.vue
+[2026-03-25] — Mobile CSS readability fixes for hero and section titles — components/HomeSection.vue, assets/css/main.css
+[2026-03-25] — Docs audit rewrite for session navigation reliability — docs/APP_FLOW.md, docs/SESSION_HANDOFF.md, docs/WORK_LOG.md
+[2026-03-25] — Nuxt dev warning cleanup: removed unused layout, set compatibilityDate, and pre-bundled three — layouts/default.vue, nuxt.config.ts

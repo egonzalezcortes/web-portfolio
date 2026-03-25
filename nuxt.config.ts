@@ -1,6 +1,8 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
+  compatibilityDate: '2026-03-25',
+
   // Use Nitro prerendering for SSG (do not set ssr: false)
   nitro: {
     prerender: {
@@ -76,6 +78,12 @@ export default defineNuxtConfig({
         { rel: 'preload', href: '/images/bg-img2-1600.avif', as: 'image' },
         { rel: 'canonical', href: 'https://egonzalezcortes.com' },
       ],
+    },
+  },
+
+  vite: {
+    optimizeDeps: {
+      include: ['three'],
     },
   },
 

@@ -1,29 +1,26 @@
-# Session Handoff
+# SESSION_HANDOFF.md
 
-Date: 2026-03-25
-Project: web-porfolio (Nuxt 3 SSG — mobile CSS fixes)
+# REWRITE THIS FILE at the end of every session. Never append.
+
+## Last updated
+
+2026-03-25
 
 ## Current state
 
-Targeted mobile CSS adjustments were applied for hero readability and overflow handling, plus responsive section-title sizing. SEO foundations and analytics wiring are in place, and deployment is pending after email/contact updates and final verification.
+Nuxt development warnings were cleaned up by removing an unused layout file and updating Nuxt configuration for compatibility date and Vite dependency pre-bundling. Local dev startup was validated and no compatibilityDate, NuxtLayout-unused, or runtime three dependency discovery warnings were observed. The site remains in a ready state for content and contact updates.
 
-## Work completed this session
+## Files changed in last session
 
-- Updated `components/HomeSection.vue` (scoped styles):
-  - Replaced mobile `.hero-s` font sizing/shadow rule.
-  - Extended existing mobile `#hero` rule with width and right padding to prevent text overflow.
-  - Added `#home::before` full-section gradient overlay for text contrast.
-- Updated `assets/css/main.css`:
-  - Added `@media (max-width: 962px)` override for `.section-title` (`font-size: 2rem`, `padding: 48px 0 8px`).
-
-## Files changed
-
-- `components/HomeSection.vue`
-- `assets/css/main.css`
+- layouts/default.vue — removed redundant default layout because app.vue already renders global shell components.
+- nuxt.config.ts — added compatibilityDate and Vite optimizeDeps include for three.
+- docs/SESSION_HANDOFF.md — rewritten with current session status.
+- docs/WORK_LOG.md — appended warning-fix session entry.
 
 ## Next task
 
-1. Configure Gmail "Send mail as" for `edgar@egonzalezcortes.com`.
-2. Update the contact section email address on the site after Gmail is configured.
-3. Run Lighthouse after all changes to confirm scores held.
-4. Commit everything that has not been committed yet.
+Configure Gmail "Send mail as" for edgar@egonzalezcortes.com, then update the contact email link in components/ContactSection.vue and run a post-change Lighthouse check.
+
+## Blockers
+
+Waiting on external Gmail mailbox/configuration access to complete "Send mail as" setup.
