@@ -12,3 +12,4 @@
   [2026-03-25] — Session D closeout: migration marked complete, legacy Vite files removed, deploy/docs finalized — docs/SESSION_HANDOFF.md
   [2026-03-25] — SEO fundamentals added: canonical, lang, OG tags, analytics plugin, robots.txt and sitemap verified
   [2026-03-25] — Copy updates: hero subheader, section headers, production section opener, contact CTA
+  [2026-03-25] — Mobile CSS fixes: hero subheader sizing, gradient overlay, section title responsive font size

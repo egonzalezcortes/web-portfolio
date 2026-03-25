@@ -299,6 +299,18 @@ onBeforeUnmount(() => {
   overflow: hidden;
 }
 
+#home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.38) 0%,
+      rgba(0, 0, 0, 0.15) 55%,
+      rgba(0, 0, 0, 0) 85%);
+}
+
 #home-bg-picture {
   position: absolute;
   inset: 0;
@@ -374,6 +386,8 @@ onBeforeUnmount(() => {
 @media (max-width: 962px) {
   #hero {
     top: 40%;
+    width: min(calc(90vw - 24px), max-content);
+    padding-right: 16px;
   }
 
   .hero-h {
@@ -385,8 +399,11 @@ onBeforeUnmount(() => {
   }
 
   .hero-s {
-    font-size: 1.5em;
-    text-shadow: 1px 4px 14px rgba(0, 0, 0, .7);
+    font-size: 1rem;
+    font-weight: 700;
+    text-shadow:
+      1px 5px 16px rgba(0, 0, 0, .7),
+      0 1px 0 rgba(0, 0, 0, .45);
   }
 }
 </style>
