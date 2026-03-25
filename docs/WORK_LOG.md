@@ -5,3 +5,5 @@
 [2026-03-24] — Step 6: Images moved to public/images/ — src/assets/imgs/ removed
 [2026-03-24] — Step 7: VITE_ renamed to NUXT_PUBLIC_ in .env example files
 [2026-03-24] — Step 11: Deploy scripts updated — dist/ replaced with .output/public/
+[2026-03-24] — Step 3: Nuxt 3 SSG initialized — nuxt.config.ts created, dependencies installed, CSS assets copied
+[2026-03-24] — Step 4: Session B migration — created `app.vue`, `layouts/default.vue`, `pages/index.vue`; updated `HomeSection.vue` image paths; ran `nuxi generate` (SSG successful)

@@ -78,7 +78,7 @@ const isStrongNetwork = () => {
 
 const loadThree = async () => {
   if (!threeDeps) {
-    threeDeps = await import('../lib/three-home-deps');
+    threeDeps = await import('../src/lib/three-home-deps');
   }
 };
 

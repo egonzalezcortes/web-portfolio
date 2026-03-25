@@ -1,0 +1,401 @@
+@import './base.css';
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('/fonts/orbitron-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('/fonts/orbitron-latin-700-normal.woff2') format('woff2');
+}
+
+#app {
+  font-weight: normal;
+  width: 100%;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --accent-matrix: #4af626;
+  --accent-phosphor: #f2a900;
+  --accent-cyan: #2de2e6;
+  --accent-synth: #db5aba;
+  --accent-nintendo-red: #e4000f;
+  --font-display: 'Orbitron', Inter, 'Segoe UI', Roboto, sans-serif;
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.hero-h,
+.hero-s,
+.hero-p,
+.section-title,
+.about-subtitle,
+.competency-title,
+.company-role,
+.navbar-brand,
+.nav-link {
+  font-family: var(--font-display);
+}
+
+section {
+  scroll-margin-top: 72px;
+}
+
+.content-section {
+  padding-bottom: 70px;
+}
+
+.section-title {
+  font-size: 75px;
+  text-align: center;
+  margin: 0;
+  padding: 75px 0 10px;
+}
+
+.glitch-title,
+.glitch-hero {
+  position: relative;
+  animation: glitch-cyber-base 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
+}
+
+.glitch-title {
+  display: block;
+  margin-inline: auto;
+}
+
+.glitch-hero {
+  display: inline-block;
+  animation-name: glitch-cyber-hero-base;
+}
+
+.glitch-title::before,
+.glitch-title::after,
+.glitch-hero::before,
+.glitch-hero::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-title::before,
+.glitch-hero::before {
+  color: var(--accent-cyan);
+  transform: translate(-1px, 0);
+  animation: glitch-cyber-a 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
+}
+
+.glitch-title::after,
+.glitch-hero::after {
+  color: var(--accent-synth);
+  transform: translate(1px, 0);
+  animation: glitch-cyber-b 5s steps(1, end) infinite;
+  animation-delay: var(--glitch-delay, 0s);
+}
+
+#home {
+  --glitch-delay: 0s;
+}
+
+#about {
+  --glitch-delay: -0.85s;
+}
+
+#competencies {
+  --glitch-delay: -1.7s;
+}
+
+#experience {
+  --glitch-delay: -2.55s;
+}
+
+#production {
+  --glitch-delay: -3.4s;
+}
+
+#contact {
+  --glitch-delay: -4.25s;
+}
+
+.glitch-hero::before {
+  animation-name: glitch-cyber-hero-a;
+}
+
+.glitch-hero::after {
+  animation-name: glitch-cyber-hero-b;
+}
+
+@keyframes glitch-cyber-base {
+  0%,
+  82%,
+  100% {
+    transform: translate(0, 0);
+    text-shadow: none;
+    color: inherit;
+    text-transform: uppercase;
+  }
+
+  83% {
+    transform: translate(-1px, -2px);
+    color: var(--accent-cyan);
+    text-shadow: -1px 0 var(--accent-cyan);
+  }
+
+  86% {
+    transform: translate(1px, 0);
+    color: var(--accent-synth);
+    text-shadow: 1px 0 var(--accent-synth);
+  }
+
+  89% {
+    transform: translate(2px, -1px);
+    color: var(--accent-matrix);
+    text-transform: lowercase;
+  }
+
+  92% {
+    transform: translate(-2px, 1px);
+    color: #fff;
+    text-shadow:
+      -1px 0 var(--accent-cyan),
+      1px 0 var(--accent-synth);
+  }
+
+  95% {
+    transform: translate(1px, 2px);
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+  }
+}
+
+@keyframes glitch-cyber-a {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+
+  83% {
+    opacity: 0.48;
+    clip-path: inset(8% 0 62% 0);
+    transform: translate(-2px, -1px);
+  }
+
+  89% {
+    opacity: 0.32;
+    clip-path: inset(45% 0 26% 0);
+    transform: translate(-3px, 1px);
+  }
+
+  95% {
+    opacity: 0.42;
+    clip-path: inset(70% 0 8% 0);
+    transform: translate(-1px, 2px);
+  }
+}
+
+@keyframes glitch-cyber-hero-base {
+  0%,
+  82%,
+  100% {
+    transform: translate(0, 0);
+    text-shadow: none;
+    color: inherit;
+    text-transform: uppercase;
+  }
+
+  83% {
+    color: var(--accent-cyan);
+    text-shadow: -1px 0 var(--accent-cyan);
+  }
+
+  86% {
+    color: var(--accent-synth);
+    text-shadow: 1px 0 var(--accent-synth);
+  }
+
+  89% {
+    color: var(--accent-matrix);
+    text-transform: lowercase;
+  }
+
+  92% {
+    color: #fff;
+    text-shadow:
+      -1px 0 var(--accent-cyan),
+      1px 0 var(--accent-synth);
+  }
+
+  95% {
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+  }
+}
+
+@keyframes glitch-cyber-hero-a {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+    text-transform: uppercase;
+  }
+
+  83% {
+    opacity: 0.48;
+    clip-path: inset(8% 0 62% 0);
+    transform: translate(-2px, -1px);
+    text-transform: uppercase;
+  }
+
+  89% {
+    opacity: 0.32;
+    clip-path: inset(45% 0 26% 0);
+    transform: translate(-3px, 1px);
+    text-transform: lowercase;
+  }
+
+  95% {
+    opacity: 0.42;
+    clip-path: inset(70% 0 8% 0);
+    transform: translate(-1px, 2px);
+    text-transform: uppercase;
+  }
+}
+
+@keyframes glitch-cyber-b {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+
+  86% {
+    opacity: 0.4;
+    clip-path: inset(20% 0 52% 0);
+    transform: translate(2px, 0);
+  }
+
+  92% {
+    opacity: 0.5;
+    clip-path: inset(56% 0 20% 0);
+    transform: translate(3px, -1px);
+  }
+
+  95% {
+    opacity: 0.28;
+    clip-path: inset(3% 0 78% 0);
+    transform: translate(1px, 1px);
+  }
+}
+
+@keyframes glitch-cyber-hero-b {
+  0%,
+  82%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+    text-transform: uppercase;
+  }
+
+  86% {
+    opacity: 0.4;
+    clip-path: inset(20% 0 52% 0);
+    transform: translate(2px, 0);
+    text-transform: uppercase;
+  }
+
+  92% {
+    opacity: 0.5;
+    clip-path: inset(56% 0 20% 0);
+    transform: translate(3px, -1px);
+    text-transform: lowercase;
+  }
+
+  95% {
+    opacity: 0.28;
+    clip-path: inset(3% 0 78% 0);
+    transform: translate(1px, 1px);
+    text-transform: uppercase;
+  }
+}
+
+.section-inner {
+  margin: 0 auto;
+  padding: 20px 30px 0;
+}
+
+::selection {
+  background: var(--accent-matrix);
+  color: #000;
+}
+
+#home ::selection {
+  background: var(--accent-matrix);
+  color: #000;
+}
+
+#about ::selection {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+#competencies ::selection {
+  background: var(--accent-phosphor);
+  color: #000;
+}
+
+#experience ::selection {
+  background: var(--accent-nintendo-red);
+  color: #fff;
+}
+
+#production ::selection {
+  background: var(--accent-synth);
+  color: #fff;
+}
+
+#contact ::selection {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.4s;
+  padding: 3px;
+}
+
+.transparent_gradient {
+  display: block;
+  position: absolute;
+}

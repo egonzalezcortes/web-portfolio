@@ -6,287 +6,62 @@ Project: `web-porfolio` (Vue 3 + Vite)
 ## Current state (ready to continue)
 
 - Performance optimization pass completed; latest Lighthouse run in this workspace reached:
-  - Performance: **93**
-  - Accessibility: **100**
-  - Best Practices: **100**
-  - SEO: **92**
-  - FCP: **2.5s**, LCP: **2.6s**, TBT: **0ms**, CLS: **0**
-- Hero image delivery is responsive and modern-format-first (`AVIF`/`WebP`) with JPG fallback.
-- Three.js hero logic is deferred and gated for better LCP/TBT.
-- Orbitron is now self-hosted locally (Google Fonts runtime chain removed).
+  # Session Handoff
 
-## Important files changed this session
+  Date: 2026-03-24
+  Project: `web-porfolio` (migrating from Vue 3 + Vite SPA to Nuxt 3 SSG)
 
-- `src/components/HomeSection.vue`
-  - Added `picture` + responsive image sources.
-  - Kept LCP image `fetchpriority="high"` and eager loading.
-  - Three.js initialization deferred and gated (`desktop`, no reduced motion, no save-data).
-  - Reduced renderer workload (`pixelRatio` cap, lower geometry segments).
-- `src/lib/three-home-deps.js`
-  - Trimmed exports to only classes used by hero.
-- `src/assets/main.css`
-  - Replaced package-imported Orbitron CSS with explicit local `@font-face` rules.
-  - Fonts now load from stable public URLs:
-    - `/fonts/orbitron-latin-600-normal.woff2`
-    - `/fonts/orbitron-latin-700-normal.woff2`
-  - Removed unused large-screen body layout rule.
-- `src/assets/base.css`
-  - Removed unused Vue starter theme variables and dark-mode semantic block.
-  - Kept only base tokens/reset relevant to this site.
-- `index.html`
-  - Removed Google Fonts preconnect/stylesheet lines.
-- `package.json`
-  - Added dependency: `@fontsource/orbitron`.
-- Added responsive hero assets:
-  - `src/assets/imgs/bg-img2-960.avif`
-  - `src/assets/imgs/bg-img2-1600.avif`
-  - `src/assets/imgs/bg-img2-960.webp`
-  - `src/assets/imgs/bg-img2-1600.webp`
+  ## What I did in this session
 
-## Continuation addendum (same date)
+  - Initialized Nuxt 3 SSG support by creating configuration and supporting files (scaffold step attempted with `npx nuxi init` but run was interactive in this environment; created config files manually to match a minimal Nuxt scaffold).
+  - Added the following files to the project root and assets:
+    - `nuxt.config.ts` (SSG / prerender config, runtime public config bindings, head preloads for fonts + hero images)
+    - `tsconfig.json`
+    - `.nuxtignore`
+    - `assets/css/main.css` (copied from `src/assets/main.css`)
+    - `assets/css/base.css` (copied from `src/assets/base.css`)
+  - Installed Nuxt into the project by running `npm install nuxt@latest --save` and `npm install` (this added Nuxt to `package.json` and installed node modules).
 
-### SEO/crawlability additions
+  Notes about safety & constraints followed:
 
-- Added `public/robots.txt`:
-  - `User-agent: *`
-  - `Allow: /`
-  - `Sitemap: https://egonzalezcortes.com/sitemap.xml`
-- Added `public/sitemap.xml` with entries for:
-  - `https://egonzalezcortes.com/`
-  - `https://egonzalezcortes.com/about`
-  - `https://egonzalezcortes.com/competencies`
-  - `https://egonzalezcortes.com/experience`
-  - `https://egonzalezcortes.com/production`
+  - Did NOT modify or delete `src/`, `vite.config.js`, or `index.html`.
+  - Did NOT create `pages/`, `components/`, or `app.vue` (Session B will handle component/page migration).
+  - Did NOT run `nuxi build` or `nuxi generate` — only ran `npx nuxi info` to validate the environment.
+  - Did not initialize a new git repo.
 
-### Performance follow-up work
+  ## Files created or modified in this session
 
-- Investigated Lighthouse console `405` warning for random hash-like paths.
-  - Confirmed app code is not issuing those requests.
-  - Reproduced behavior as method-specific on unknown paths (`GET/HEAD 200`, `POST/OPTIONS 405`) in production.
-  - Provided Nginx hardening guidance for method handling and SPA fallback behavior.
-- Added critical font optimization:
-  - Font preload in `index.html` for Orbitron 600.
-  - Moved font files to `public/fonts/` for stable, cacheable URLs.
-- Added responsive hero image preload in `index.html` using `imagesrcset` + `imagesizes` and `fetchpriority="high"`.
+  - Created: `nuxt.config.ts`
+  - Created: `tsconfig.json`
+  - Created: `.nuxtignore`
+  - Created: `assets/css/main.css` (copy)
+  - Created: `assets/css/base.css` (copy)
+  - Modified: `package.json` (added `nuxt` dependency)
+  - Modified: `node_modules/` via `npm install`
 
-### Hero typography/layout fix
+  ## Verification
 
-- Updated `src/components/HomeSection.vue` hero styles to avoid clipping on desktop/large screens:
-  - Reduced and responsive `h1` size via `clamp(...)`.
-  - Removed negative left margin on the hero title.
-  - Made hero container width/left offset responsive to prevent cutoff.
+  - Ran `npx nuxi info` — Nuxt recognized the project and reported Nuxt/Nitro versions; no fatal config error was produced in this environment.
 
-### Additional deployment notes
+  ## Next task (Session B)
 
-- For new public fonts, add long-lived cache policy in Nginx:
-  - `location /fonts/ { expires 1y; add_header Cache-Control "public, max-age=31536000, immutable" always; try_files $uri =404; }`
-- Keep Certbot include lines unchanged; avoid duplicating `ssl_protocols` if already defined in Certbot-managed include.
+  - Migrate components and `pages/index.vue` to Nuxt app structure, implement `app.vue` and `layouts/default.vue`, and validate SSG generation with `nuxi generate`.
 
-### Staging environment scaffolding added
+  ## Session B (2026-03-24) — Components & Pages Migration
 
-- Added deploy scripts:
-  - `scripts/deploy-staging.sh`
-  - `scripts/deploy-prod.sh`
-- Added staging Nginx template:
-  - `docs/nginx-staging.egonzalezcortes.com.conf`
-- Template includes:
-  - SPA fallback + cache rules for `/assets/` and `/fonts/`
-  - basic auth guard for staging (`auth_basic`)
-  - `X-Robots-Tag: noindex, nofollow, noarchive`
+  - Created Nuxt entry files and pages:
+    - `app.vue` (delegates to Nuxt pages)
+    - `layouts/default.vue` (uses existing `NavBar` and `SiteFooter` components)
+    - `pages/index.vue` (composes `HomeSection`, `AboutSection`, `CompetenciesSection`, `ExperienceSection`, `ProductionSection`, `ContactSection` by importing from `src/components`)
+  - Adjustments made to support SSG:
+    - Updated `src/components/HomeSection.vue` to reference public images (`/images/...`) instead of missing `src/assets/imgs/` imports.
+    - Added `assets/css/` copies of `main.css` and `base.css` in Session A.
+    - Created `assets/sounds/index.js` (stubbed exports) to avoid bundling missing audio binaries during generation; real audio files remain in `src/assets/sounds/` and will be migrated later.
+    - Copied tech icon SVGs from `src/assets/tech-icons/` into `assets/tech-icons/` so SVG imports resolve during build.
+  - Ran `npx nuxi generate` to validate SSG — generation completed successfully and `.output/public` was produced.
 
-Quick usage:
+  ## Next task (Session C)
 
-```bash
-# Staging deploy
-TARGET_HOST=<server-ip-or-dns> TARGET_USER=<ssh-user> ./scripts/deploy-staging.sh
-
-# Production deploy
-TARGET_HOST=<server-ip-or-dns> TARGET_USER=<ssh-user> ./scripts/deploy-prod.sh
-```
-
-Staging server bootstrap checklist:
-
-```bash
-sudo cp /path/to/repo/docs/nginx-staging.egonzalezcortes.com.conf /etc/nginx/sites-available/staging.egonzalezcortes.com
-sudo ln -s /etc/nginx/sites-available/staging.egonzalezcortes.com /etc/nginx/sites-enabled/staging.egonzalezcortes.com
-sudo htpasswd -c /etc/nginx/.htpasswd-staging <staging-user>
-sudo nginx -t && sudo systemctl reload nginx
-```
-
-## Lighthouse reports generated in repo
-
-- `lighthouse-after-pass.json`
-- `lighthouse-after-picture.json`
-- `lighthouse-after-three-refactor.json`
-- and additional prior snapshots (`lighthouse-after*.json`)
-
-## Deployment / Nginx recommendations prepared
-
-For DigitalOcean + Nginx self-hosting:
-
-1. Cache hashed assets for 1 year + immutable:
-   - `location /assets/ { expires 1y; Cache-Control: public, max-age=31536000, immutable; }`
-2. Keep HTML uncached/short-lived:
-   - `location = /index.html { no-cache, no-store, must-revalidate; }`
-3. SPA fallback:
-   - `location / { try_files $uri $uri/ /index.html; }`
-4. Enable HTTP/2:
-   - `listen 443 ssl http2;`
-5. Keep Certbot SSL include lines unchanged.
-6. Update global SSL protocols to modern set:
-   - `ssl_protocols TLSv1.2 TLSv1.3;`
-
-## Likely source of Lighthouse console 404 warning
-
-- Stale hashed asset requests after deploy (old tab or cached HTML referencing removed chunk).
-- Mitigation:
-  - Atomic deploys (release folders + symlink swap).
-  - Keep previous release assets for a short overlap window.
-
-## Suggested next actions when resuming
-
-1. Deploy latest build (includes robots/sitemap + font/image preload + hero typography fix).
-2. Ensure Nginx includes cache rules for both `/assets/` and `/fonts/`.
-3. Run `nginx -t` and reload.
-4. Re-run 3–5 Lighthouse passes and take median for stability.
-5. If needed, continue tuning JS payload (notably `vendor-three`) and critical path.
-
-## Quick verification commands
-
-```bash
-npm run build
-npm run preview -- --port 4177
-npx --yes lighthouse@12.8.2 http://localhost:4177 \
-  --output=json --output-path=./lighthouse-resume.json \
-  --only-categories=performance,accessibility,best-practices,seo \
-  --chrome-flags='--headless --no-sandbox --disable-gpu' --quiet
-```
-
-## Continuation addendum (2026-03-03)
-
-### Staging environment status
-
-- DNS + TLS for `staging.egonzalezcortes.com` configured and working.
-- Active staging root is `/var/www/egonzalezcortes-staging`.
-- Staging now runs without basic auth (public staging), by intent.
-- Staging anti-indexing protections validated:
-  - `robots.txt` returns `Disallow: /`
-  - `X-Robots-Tag: noindex, nofollow, noarchive` present in responses.
-
-### Nginx conflict troubleshooting completed
-
-- Root cause of prior inconsistencies was duplicate staging server blocks from the default site.
-- Resolution path:
-  - removed/disabled conflicting default staging blocks
-  - ensured dedicated staging vhost handles the domain
-  - corrected staging cert path to `/etc/letsencrypt/live/staging.egonzalezcortes.com/...`
-
-### Deploy script improvements completed
-
-- `scripts/deploy-staging.sh` and `scripts/deploy-prod.sh` now:
-  - resolve repo root automatically (work from any cwd)
-  - accept positional `user@server`
-  - deploy to hard-coded target dirs:
-    - staging -> `/var/www/egonzalezcortes-staging`
-    - production -> `/var/www/egonzalezcortes.com`
-
-### Nginx docs in repo
-
-- Local server-specific configs stored in docs and gitignored:
-  - `docs/nginx-staging.egonzalezcortes.com.conf`
-  - `docs/nginx-production.egonzalezcortes.com.conf`
-- Sanitized committed examples added:
-  - `docs/nginx-staging.example.conf`
-  - `docs/nginx-production.example.conf`
-
-### Immediate next step
-
-- Implement analytics rollout safely:
-  - production-only activation
-  - disabled in staging
-  - verify runtime behavior on both hosts.
-
-### Analytics completion status (2026-03-03)
-
-- Analytics provider abstraction implemented in app runtime (`simple | ga4 | none`).
-- Current selected strategy:
-  - production: `simple`
-  - staging: `none`
-- Environment templates added:
-  - `.env.example`
-  - `.env.production.example`
-  - `.env.staging.example`
-- Actual envs updated for current deployment flow:
-  - `.env.production` uses `VITE_ANALYTICS_PROVIDER=simple`
-  - `.env.staging` uses `VITE_ANALYTICS_PROVIDER=none`
-- Build validation complete for both modes:
-  - `npm run build`
-  - `npm run build:staging`
-- Runtime verification completed by user with Simple Analytics dashboard showing script installation state.
-
-### Recommended next actions (new)
-
-1. Let production traffic settle (Simple Analytics may take some time for first visible data depending on browser/privacy settings).
-2. Add a short release runbook section in docs for repeatable staging -> production promotions.
-3. (Optional) Add CI automation for deploy scripts (`develop` -> staging, `main` -> production).
-
-## Continuation addendum (2026-03-03, later)
-
-### UI animation updates
-
-- Staggered glitch timing across section titles so bursts are out of phase.
-- Kept the same 5-second interval and applied section-specific delay offsets.
-
-Files:
-
-- `src/assets/main.css`
-
-### Favicon rollout updates
-
-- Integrated full favicon set from `public/favicons/` in `index.html`.
-- Added `public/favicons/site.webmanifest` and linked it in head.
-- Synced root fallback icon: `public/favicon.ico` from `public/favicons/favicon.ico`.
-- Added README maintenance note for favicon sync workflow.
-
-Files:
-
-- `index.html`
-- `public/favicons/site.webmanifest`
-- `public/favicon.ico`
-- `README.md`
-
-### Staging favicon issue (resolved)
-
-- Symptom: favicon changed locally but appeared stale on staging.
-- Root cause: aggressive favicon caching in browser/session.
-- Mitigation: added version query suffix to favicon links (`?v=20260303`).
-- Outcome: user confirmed staging now shows updated favicon.
-
-### Next session focus
-
-Investigate why Lighthouse performance is significantly lower on mobile than desktop, despite mobile disabling Three.js sphere rendering.
-
-Planned approach:
-
-1. Run paired Lighthouse audits for the same revision (mobile + desktop, 3-5 runs, compare median).
-2. Compare diagnostics/opportunities:
-
-- `mainthread-work-breakdown`
-- `bootup-time`
-- `long-tasks`
-- LCP element/resource details
-- transfer/request profile
-
-3. Confirm mobile hero path behavior:
-
-- Three.js not initialized
-- selected hero image candidate and effective bytes
-- font timing impact on first paint/LCP
-
-4. Produce prioritized fixes and re-run medians.
-
-Likely first suspects:
-
-- mobile LCP image bytes/selection,
-- JS parse/eval cost from initial bundles,
-- font/render timing under mobile throttling.
+  - Replace stubbed sound assets with real files in `assets/` or update imports to point at `public/` as desired.
+  - Move `src/components/*` into Nuxt `components/` and convert any remaining Vite-specific imports.
+  - Review image/font references and remove `src/` leftovers when ready to delete the old Vite SPA files.
