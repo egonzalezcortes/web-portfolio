@@ -4,12 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:staging": "vite build --mode staging",
-    "preview": "vite preview",
+    "dev": "nuxi dev",
+    "build": "nuxi generate",
+    "build:staging": "nuxi generate",
+    "build:production": "nuxi generate",
+    "preview": "npx serve .output/public",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write components/ pages/ layouts/ assets/",
+    "deploy:staging": "REMOTE=egonzalezcortes@omega-xiii bash scripts/staging-deploy.sh",
+    "deploy:prod": "REMOTE=egonzalezcortes@omega-xiii bash scripts/prod-deploy.sh"
   },
   "dependencies": {
     "@fontsource/orbitron": "^5.2.8",

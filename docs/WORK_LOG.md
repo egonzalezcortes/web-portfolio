@@ -7,5 +7,5 @@
   [2026-03-24] — Step 11: Deploy scripts updated — dist/ replaced with .output/public/
   [2026-03-24] — Step 3: Nuxt 3 SSG initialized — nuxt.config.ts created, dependencies installed, CSS assets copied
   [2026-03-24] — Step 4: Session B migration — created `app.vue`, `layouts/default.vue`, `pages/index.vue`; updated `HomeSection.vue` image paths; ran `nuxi generate` (SSG successful)
-[2026-03-24] — NavBar SSR fix + build verification — components/NavBar.vue, .output/public confirmed
-[2026-03-25] — Steps 8-9: nginx config updated, Lighthouse baseline recorded — docs/nginx-production.example.conf, docs/nginx-staging.example.conf, docs/lighthouse/index-2026-03-24-mobile.json, docs/lighthouse/index-2026-03-24-desktop.json
+  [2026-03-24] — NavBar SSR fix + build verification — components/NavBar.vue, .output/public confirmed
+  [2026-03-25] — Steps 8-9: nginx config updated, Lighthouse baseline recorded — docs/nginx-production.example.conf, docs/nginx-staging.example.conf, docs/lighthouse/index-2026-03-24-mobile.json, docs/lighthouse/index-2026-03-24-desktop.json

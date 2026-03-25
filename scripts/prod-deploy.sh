@@ -3,8 +3,8 @@ set -euo pipefail
 
 APP_NAME="web-porfolio"
 REMOTE="${REMOTE:-}"
-TARGET_HOST="${TARGET_HOST:-}"
-TARGET_USER="${TARGET_USER:-root}"
+TARGET_HOST="${TARGET_HOST:-omega-xiii}"
+TARGET_USER="${TARGET_USER:-egonzalezcortes}"
 TARGET_PORT="${TARGET_PORT:-22}"
 TARGET_DIR="/var/www/egonzalezcortes.com"
 SSH_OPTS="-p ${TARGET_PORT}"
